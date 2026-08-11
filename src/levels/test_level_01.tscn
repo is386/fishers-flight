@@ -40,6 +40,16 @@ position = Vector2(90, 52)
 length = 5.0
 type = 1
 
+[node name="Hazard3" parent="Entities" unique_id=128221699 instance=ExtResource("3_ig8ra")]
+position = Vector2(48, -48)
+length = 5.0
+type = 2
+
+[node name="Hazard4" parent="Entities" unique_id=174622270 instance=ExtResource("3_ig8ra")]
+position = Vector2(-48, -48)
+length = 5.0
+type = 3
+
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1102338335]
 collision_mask = 0
 
