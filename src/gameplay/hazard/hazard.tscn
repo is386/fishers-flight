@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bxouwheh3acpy"]
+
+[ext_resource type="Script" uid="uid://dp7s5mvft4ns6" path="res://src/gameplay/hazard/hazard.gd" id="1_6ypvc"]
+[ext_resource type="PackedScene" uid="uid://b6an0f2vh3qp3" path="res://src/gameplay/hazard/hazard_block.tscn" id="2_6ypvc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
+size = Vector2(16, 16)
+
+[node name="Hazard" type="Area2D" unique_id=86372199]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_6ypvc")
+length = 5.0
+hazard_block_scene = ExtResource("2_6ypvc")
+
+[node name="Blocks" type="Node2D" parent="." unique_id=1508382442]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1619630274]
+shape = SubResource("RectangleShape2D_sn2t0")
