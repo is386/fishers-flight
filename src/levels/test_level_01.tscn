@@ -60,6 +60,7 @@ type = 2
 [node name="Hazard7" parent="Entities" unique_id=1082154536 instance=ExtResource("3_ig8ra")]
 position = Vector2(208, -112)
 length = 5
+rotating = true
 
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1102338335]
 collision_mask = 0

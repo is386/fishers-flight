@@ -7,6 +7,7 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 @export var length: int = 1
 @export var type: HazardType = HazardType.HORIZONTAL
+@export var rotating: bool = false
 @export var hazard_block_scene: PackedScene
 
 @onready var blocks: Node2D = %Blocks
@@ -73,6 +74,11 @@ func _create_block(offset: float, side: int) -> Sprite2D:
 		block.global_position.y = block_position
 
 	return block
+
+
+func _physics_process(delta: float) -> void:
+	if rotating:
+		rotation += delta
 
 
 func _on_body_entered(_body: Node2D) -> void:
