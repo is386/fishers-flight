@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://da2e87er73qht"]
+
+[ext_resource type="Script" uid="uid://cxq2c1rwjcp4o" path="res://src/ui/menus/settings/settings_menu.gd" id="1_settings"]
+[ext_resource type="PackedScene" uid="uid://3ikmkibirtt7" path="res://src/ui/menus/settings/display_settings.tscn" id="2_isby8"]
+[ext_resource type="PackedScene" uid="uid://m6j5b5mshpdr" path="res://src/ui/menus/settings/sound_settings.tscn" id="3_vxm4w"]
+
+[node name="SettingsMenu" type="Control" unique_id=163834213]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=574453784]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="MarginContainer" parent="CenterContainer" unique_id=505264145]
+layout_mode = 2
+
+[node name="Content" type="MarginContainer" parent="CenterContainer/Panel" unique_id=956238203]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/Content" unique_id=1187443902]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SettingsLabel" type="Label" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=1062325404]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="SettingsTabs" type="TabContainer" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=631539106]
+unique_name_in_owner = true
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+tab_focus_mode = 0
+tab_0/title = "Display"
+tab_1/title = "Sound"
+
+[node name="DisplaySettings" parent="CenterContainer/Panel/Content/VBoxContainer/SettingsTabs" unique_id=179823153 instance=ExtResource("2_isby8")]
+layout_mode = 2
+metadata/_tab_name = "Display"
+
+[node name="SoundSettings" parent="CenterContainer/Panel/Content/VBoxContainer/SettingsTabs" unique_id=2087217328 instance=ExtResource("3_vxm4w")]
+visible = false
+layout_mode = 2
+metadata/_tab_name = "Sound"
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=1403033194]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"

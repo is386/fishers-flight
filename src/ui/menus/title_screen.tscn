@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ehbd0ol75ec8"]
+
+[ext_resource type="Script" uid="uid://cmwqrclygi2r5" path="res://src/ui/menus/title_screen.gd" id="1_title"]
+
+[node name="TitleScreen" type="Control" unique_id=1736167833]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_title")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1349919533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="MarginContainer" parent="CenterContainer" unique_id=1070614054]
+layout_mode = 2
+
+[node name="Content" type="MarginContainer" parent="CenterContainer/Panel" unique_id=1343029574]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/Content" unique_id=1047961694]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=740623256]
+layout_mode = 2
+text = "Template Project"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=1908455271]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer/Buttons" unique_id=2102033395]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer/Buttons" unique_id=422166878]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer/Buttons" unique_id=1682336999]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"

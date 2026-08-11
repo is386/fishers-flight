@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://csehfx88edrj1"]
+
+[ext_resource type="Script" uid="uid://ctfib7m441jbs" path="res://src/core/main.gd" id="1_avv2o"]
+[ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="2_ukt3u"]
+[ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="3_title"]
+[ext_resource type="Script" uid="uid://enc1ym3u6tkt" path="res://src/core/managers/level_manager.gd" id="4_lvlmgr"]
+[ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="5_pause"]
+[ext_resource type="PackedScene" uid="uid://da2e87er73qht" path="res://src/ui/menus/settings/settings_menu.tscn" id="6_settings"]
+
+[node name="Main" type="Node" unique_id=1077554886]
+process_mode = 3
+script = ExtResource("1_avv2o")
+
+[node name="Managers" type="Node" parent="." unique_id=44772124]
+
+[node name="LevelManager" type="Node" parent="Managers" unique_id=1600000004]
+unique_name_in_owner = true
+script = ExtResource("4_lvlmgr")
+level_root_path = NodePath("../../World/LevelRoot")
+
+[node name="World" type="Node2D" parent="." unique_id=2140206829]
+process_mode = 1
+
+[node name="LevelRoot" type="Node2D" parent="World" unique_id=1952688765]
+unique_name_in_owner = true
+
+[node name="EntityRoot" type="Node2D" parent="World" unique_id=2056603287]
+unique_name_in_owner = true
+
+[node name="EffectRoot" type="Node2D" parent="World" unique_id=821278954]
+unique_name_in_owner = true
+
+[node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1600000001]
+unique_name_in_owner = true
+layer = 15
+
+[node name="MenuRoot" type="Control" parent="MenuLayer" unique_id=1600000002]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleScreen" parent="MenuLayer/MenuRoot" unique_id=1600000003 instance=ExtResource("3_title")]
+layout_mode = 1
+level_uid = "uid://kikf44gko1yv"
+
+[node name="SettingsMenu" parent="MenuLayer/MenuRoot" unique_id=1910660451 instance=ExtResource("6_settings")]
+visible = false
+layout_mode = 1
+
+[node name="PauseMenuRoot" type="Control" parent="MenuLayer" unique_id=931117828]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PauseMenu" parent="MenuLayer/PauseMenuRoot" unique_id=272672056 instance=ExtResource("5_pause")]
+layout_mode = 1
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1767459730]
+process_mode = 3
+layer = 200
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=940994778]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=150186020 instance=ExtResource("2_ukt3u")]
+layout_mode = 1
+mouse_behavior_recursive = 1
