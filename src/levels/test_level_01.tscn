@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl227khj50s7w" path="res://src/levels/base_level.gd" id="1_gilss"]
 [ext_resource type="Texture2D" uid="uid://ca18ryer10iq8" path="res://assets/art/world/template_tiles.png" id="2_ig8ra"]
+[ext_resource type="PackedScene" uid="uid://bxouwheh3acpy" path="res://src/gameplay/hazard/hazard.tscn" id="3_ig8ra"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rocl4"]
 texture = ExtResource("2_ig8ra")
@@ -29,6 +30,9 @@ tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAAAAAAAAgAAAAAAAAAAAP//AgAAAAA
 tile_set = SubResource("TileSet_xg6m2")
 
 [node name="Entities" type="Node2D" parent="." unique_id=132771634]
+
+[node name="Hazard" parent="Entities" unique_id=86372199 instance=ExtResource("3_ig8ra")]
+position = Vector2(0, 52)
 
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1102338335]
 collision_mask = 0
