@@ -20,6 +20,7 @@ func _ready() -> void:
 		return
 
 	_build_hazard()
+	body_entered.connect(_on_body_entered)
 
 
 func _build_hazard() -> void:
@@ -40,39 +41,20 @@ func _build_hazard() -> void:
 		pair_num += 1
 
 	var rectangle := RectangleShape2D.new()
-	var hazard_size := BLOCK_SIZE * length
-	var diagonal_block_size := sqrt(pow(BLOCK_SIZE, 2) * 2)
-
-	if type == HazardType.HORIZONTAL:
-		rectangle.size = Vector2(hazard_size, BLOCK_SIZE)
-	elif type == HazardType.VERTICAL:
-		rectangle.size = Vector2(BLOCK_SIZE, hazard_size)
-	elif type == HazardType.DIAGONAL_UP:
-		collision_shape.rotation_degrees = -45
-		rectangle.size = Vector2(diagonal_block_size * length, BLOCK_SIZE)
-	elif type == HazardType.DIAGONAL_DOWN:
-		collision_shape.rotation_degrees = 45
-		rectangle.size = Vector2(diagonal_block_size * length, BLOCK_SIZE)
-
+	rectangle.size = Vector2(BLOCK_SIZE * length, BLOCK_SIZE)
 	collision_shape.shape = rectangle
-	body_entered.connect(_on_body_entered)
+
+	if type == HazardType.VERTICAL:
+		rotation_degrees = 90
+	elif type == HazardType.DIAGONAL_UP:
+		rotation_degrees = -45
+	elif type == HazardType.DIAGONAL_DOWN:
+		rotation_degrees = 45
 
 
 func _create_block(offset: float, side: int) -> Sprite2D:
 	var block := hazard_block_scene.instantiate() as Sprite2D
-
-	var block_position := offset * side
-	if type == HazardType.HORIZONTAL:
-		block.global_position.x = block_position
-	elif type == HazardType.VERTICAL:
-		block.global_position.y = block_position
-	elif type == HazardType.DIAGONAL_UP:
-		block.global_position.x = block_position
-		block.global_position.y = -block_position
-	elif type == HazardType.DIAGONAL_DOWN:
-		block.global_position.x = block_position
-		block.global_position.y = block_position
-
+	block.global_position.x = offset * side
 	return block
 
 
