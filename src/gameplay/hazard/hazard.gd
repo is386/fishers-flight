@@ -1,7 +1,10 @@
 class_name Hazard
 extends Area2D
 
+enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
+
 @export var length: float = 1
+@export var type: HazardType = HazardType.HORIZONTAL
 @export var hazard_block_scene: PackedScene
 
 @onready var blocks: Node2D = %Blocks
@@ -13,19 +16,38 @@ func _ready() -> void:
 		push_error("Hazard length cannot be less than or equal to 0")
 		return
 
+	_build_hazard()
+
+
+func _build_hazard() -> void:
 	var block_size: float
 
 	for i in range(length):
 		var block := hazard_block_scene.instantiate() as Sprite2D
 		block_size = block.texture.get_size().x
-		block.global_position.x = global_position.x + (i * block_size)
+
+		var block_position := i * block_size
+		if type == HazardType.HORIZONTAL:
+			block.global_position.x = block_position
+		elif type == HazardType.VERTICAL:
+			block.global_position.y = block_position
+
 		blocks.add_child(block)
 
-	global_position.x -= (length - 1) * block_size / 2
 	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(block_size * length, block_size)
+	var hazard_offset := (length - 1) * block_size / 2
+	var hazard_size := block_size * length
+
+	if type == HazardType.HORIZONTAL:
+		global_position.x -= hazard_offset
+		collision_shape.position.x += hazard_offset
+		rectangle.size = Vector2(hazard_size, block_size)
+	elif type == HazardType.VERTICAL:
+		global_position.y -= hazard_offset
+		collision_shape.position.y += hazard_offset
+		rectangle.size = Vector2(block_size, hazard_size)
+
 	collision_shape.shape = rectangle
-	collision_shape.position.x += (length - 1) * block_size / 2
 
 	body_entered.connect(_on_body_entered)
 

@@ -33,6 +33,12 @@ tile_set = SubResource("TileSet_xg6m2")
 
 [node name="Hazard" parent="Entities" unique_id=86372199 instance=ExtResource("3_ig8ra")]
 position = Vector2(0, 52)
+length = 5.0
+
+[node name="Hazard2" parent="Entities" unique_id=898697006 instance=ExtResource("3_ig8ra")]
+position = Vector2(90, 52)
+length = 5.0
+type = 1
 
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1102338335]
 collision_mask = 0
