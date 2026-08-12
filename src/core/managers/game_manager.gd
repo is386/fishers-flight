@@ -4,6 +4,7 @@ extends Node
 var distance: float = 0
 var milestone: float = 1000
 var _is_started: bool
+var _distance_increment: float = 0.2
 
 
 func _ready() -> void:
@@ -13,10 +14,11 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not _is_started:
 		return
-	distance += 0.2
+	distance += _distance_increment
 
-	if distance > milestone:
+	if distance > milestone and milestone <= 5000:
 		milestone += 1000
+		_distance_increment *= 1.5
 		SignalBus.milestone_reached.emit()
 
 
