@@ -19,3 +19,5 @@ signal level_loaded
 signal level_unloading
 
 signal milestone_reached
+
+signal player_died

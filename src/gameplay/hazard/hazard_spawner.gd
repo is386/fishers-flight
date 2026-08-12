@@ -22,6 +22,7 @@ func _ready() -> void:
 	_max_y = get_viewport_rect().size.y / camera.zoom.y / 2
 
 	SignalBus.milestone_reached.connect(_on_milestone_reached)
+	SignalBus.player_died.connect(_on_player_died)
 
 
 func _physics_process(_delta: float) -> void:
@@ -58,7 +59,6 @@ func _on_spawn_timer_timeout() -> void:
 
 
 func _on_hazard_despawned() -> void:
-	print("despawned")
 	_num_hazards = max(0, _num_hazards - 1)
 	if _num_hazards == 0:
 		_spawn_timer.start()
@@ -67,3 +67,7 @@ func _on_hazard_despawned() -> void:
 func _on_milestone_reached() -> void:
 	_max_hazards += 1
 	_spawn_timer.wait_time = max(0.5, _spawn_timer.wait_time - 0.75)
+
+
+func _on_player_died() -> void:
+	queue_free()
