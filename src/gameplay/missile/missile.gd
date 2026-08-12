@@ -8,6 +8,7 @@ extends Area2D
 
 func _ready() -> void:
 	visibility_notifier.screen_exited.connect(_on_screen_exited)
+	body_entered.connect(_on_body_entered)
 
 
 func _physics_process(delta: float) -> void:

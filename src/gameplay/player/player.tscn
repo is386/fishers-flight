@@ -6,12 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
 size = Vector2(12, 14)
 
-[node name="Player" type="CharacterBody2D" unique_id=854491989]
+[node name="Player" type="CharacterBody2D" unique_id=854491989 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_k2146")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1828022754]
 texture = ExtResource("2_64h4j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824057970]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824057970 groups=["player"]]
 shape = SubResource("RectangleShape2D_sn2t0")

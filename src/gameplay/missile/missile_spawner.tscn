@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b2gq5qr5wh064"]
+
+[ext_resource type="Script" uid="uid://bofwfkeh8ebwn" path="res://src/gameplay/missile/missile_spawner.gd" id="1_xvbq8"]
+[ext_resource type="PackedScene" uid="uid://d2s3l5p06llwo" path="res://src/gameplay/missile/missile.tscn" id="2_v70k7"]
+
+[node name="MissileSpawner" type="Node2D" unique_id=1146834668]
+script = ExtResource("1_xvbq8")
+missile_scene = ExtResource("2_v70k7")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1958347021]
+wait_time = 8.0
+autostart = true
+
+[node name="AimTimer" type="Timer" parent="." unique_id=1451281607]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1861136002]
+wait_time = 0.5
+one_shot = true

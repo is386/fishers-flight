@@ -16,6 +16,7 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var despawn_timer: Timer = $DespawnTimer
 
 
 func _ready() -> void:
@@ -28,11 +29,8 @@ func _ready() -> void:
 
 	body_entered.connect(_on_body_entered)
 
-	var timer := Timer.new()
-	timer.wait_time = (get_viewport_rect().size.x / 1.5 + BLOCK_SIZE * length) / speed
-	timer.autostart = true
-	timer.timeout.connect(_on_timer_timeout)
-	add_child(timer)
+	despawn_timer.timeout.connect(_on_despawn_timer_timeout)
+	despawn_timer.start((get_viewport_rect().size.x / 1.5 + BLOCK_SIZE * length) / speed)
 
 
 func _physics_process(delta: float) -> void:
@@ -82,6 +80,6 @@ func _on_body_entered(_body: Node2D) -> void:
 	player.die()
 
 
-func _on_timer_timeout() -> void:
+func _on_despawn_timer_timeout() -> void:
 	despawned.emit()
 	queue_free()
