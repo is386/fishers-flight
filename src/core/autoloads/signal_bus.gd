@@ -17,3 +17,5 @@ signal settings_requested(return_to: Control)
 
 signal level_loaded
 signal level_unloading
+
+signal milestone_reached
