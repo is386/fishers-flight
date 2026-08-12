@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://csehfx88edrj1"]
 
 [ext_resource type="Script" uid="uid://ctfib7m441jbs" path="res://src/core/main.gd" id="1_avv2o"]
+[ext_resource type="Script" uid="uid://drtbq8p1jgjmi" path="res://src/core/autoloads/game_manager.gd" id="2_nxx65"]
 [ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="2_ukt3u"]
 [ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="3_title"]
+[ext_resource type="PackedScene" uid="uid://b6qebhq6xggvu" path="res://src/ui/hud/score_display.tscn" id="4_2uitn"]
 [ext_resource type="Script" uid="uid://enc1ym3u6tkt" path="res://src/core/managers/level_manager.gd" id="4_lvlmgr"]
 [ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="5_pause"]
 [ext_resource type="PackedScene" uid="uid://da2e87er73qht" path="res://src/ui/menus/settings/settings_menu.tscn" id="6_settings"]
@@ -12,6 +14,12 @@ process_mode = 3
 script = ExtResource("1_avv2o")
 
 [node name="Managers" type="Node" parent="." unique_id=44772124]
+
+[node name="GameManager" type="Node" parent="Managers" unique_id=2075326863]
+unique_name_in_owner = true
+process_mode = 1
+script = ExtResource("2_nxx65")
+metadata/_custom_type_script = "uid://drtbq8p1jgjmi"
 
 [node name="LevelManager" type="Node" parent="Managers" unique_id=1600000004]
 unique_name_in_owner = true
@@ -29,6 +37,21 @@ unique_name_in_owner = true
 
 [node name="EffectRoot" type="Node2D" parent="World" unique_id=821278954]
 unique_name_in_owner = true
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=1519988769]
+layer = 5
+
+[node name="HudRoot" type="Control" parent="HudLayer" unique_id=1474753319]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreDisplay" parent="HudLayer/HudRoot" unique_id=1132020845 node_paths=PackedStringArray("game_manager") instance=ExtResource("4_2uitn")]
+layout_mode = 1
+offset_left = 6.0
+offset_right = 6.0
+game_manager = NodePath("../../../Managers/GameManager")
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1600000001]
 unique_name_in_owner = true
