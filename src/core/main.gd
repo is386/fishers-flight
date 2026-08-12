@@ -5,6 +5,7 @@ const PLAYER_SCENE_UID: String = "uid://bk2cu2ameptuy"
 
 var player: Player = null
 
+@onready var game_manager: GameManager = %GameManager
 @onready var level_manager: LevelManager = %LevelManager
 @onready var entity_root: Node2D = %EntityRoot
 @onready var effect_root: Node2D = %EffectRoot
@@ -89,7 +90,7 @@ func _load_level(level_scene: String, spawn_id: StringName = &"") -> BaseLevel:
 
 	_place_player_at_level_spawn(spawn_id)
 
-	SignalBus.level_loaded.emit(level)
+	SignalBus.level_loaded.emit()
 	return level
 
 

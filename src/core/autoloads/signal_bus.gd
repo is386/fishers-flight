@@ -15,5 +15,5 @@ signal game_resumed
 ## where to return to.
 signal settings_requested(return_to: Control)
 
-signal level_unloading(level: BaseLevel)
-signal level_loaded(level: BaseLevel)
+signal level_loaded
+signal level_unloading

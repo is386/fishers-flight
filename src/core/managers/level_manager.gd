@@ -43,6 +43,6 @@ func unload_current_level() -> void:
 	if current_level == null:
 		return
 
-	SignalBus.level_unloading.emit(current_level)
+	SignalBus.level_unloading.emit()
 	current_level.queue_free()
 	current_level = null
