@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d2s3l5p06llwo"]
+
+[ext_resource type="Texture2D" uid="uid://dockc6lvfcbmh" path="res://assets/art/world/hazards.png" id="1_d4h4a"]
+[ext_resource type="Script" uid="uid://e1hfcddmut6g" path="res://src/gameplay/missile/missile.gd" id="2_ai7co"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
+size = Vector2(16, 16)
+
+[node name="Missile" type="Area2D" unique_id=1748702343]
+script = ExtResource("2_ai7co")
+speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=462210563]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_d4h4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2003343807]
+shape = SubResource("RectangleShape2D_sn2t0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=979109066]
+position = Vector2(0, -1)
+rect = Rect2(8, -1, 2, 4)
