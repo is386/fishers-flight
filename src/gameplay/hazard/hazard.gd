@@ -9,6 +9,7 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 @export var type: HazardType = HazardType.HORIZONTAL
 @export var rotating: bool = false
 @export var speed: float = 50
+@export var max_speed: float = 200
 @export var hazard_block_scene: PackedScene
 
 @onready var blocks: Node2D = %Blocks
@@ -24,6 +25,8 @@ func _ready() -> void:
 	_build_hazard()
 	body_entered.connect(_on_body_entered)
 	visibility_notifier.screen_exited.connect(_on_screen_exited)
+
+	speed = min(speed, max_speed)
 
 
 func _physics_process(delta: float) -> void:
