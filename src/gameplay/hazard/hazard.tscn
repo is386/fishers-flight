@@ -17,3 +17,6 @@ unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1619630274]
 shape = SubResource("RectangleShape2D_sn2t0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1130663631]
+rect = Rect2(-8, -8, 16, 16)
