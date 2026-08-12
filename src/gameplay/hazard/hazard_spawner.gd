@@ -6,6 +6,8 @@ extends Node2D
 
 var _spawn_timer: Timer
 var _max_y: float
+var _max_hazards: int = 1
+var _num_hazards: int = 0
 
 
 func _ready() -> void:
@@ -18,8 +20,16 @@ func _ready() -> void:
 
 	_max_y = get_viewport_rect().size.y / camera.zoom.y / 2
 
+	SignalBus.milestone_reached.connect(_on_milestone_reached)
+
 
 func _on_spawn_timer_timeout() -> void:
+	if _num_hazards == _max_hazards:
+		_spawn_timer.stop()
+		return
+
+	_num_hazards += 1
+
 	var hazard := hazard_scene.instantiate() as Hazard
 	hazard.length = randi_range(3, 5)
 	hazard.type = randi_range(0, 3)
@@ -37,3 +47,14 @@ func _on_spawn_timer_timeout() -> void:
 
 	hazard.global_position = Vector2(global_position.x, y)
 	entity_root.add_child(hazard)
+	hazard.visibility_notifier.screen_exited.connect(_on_hazard_screen_exited)
+
+
+func _on_hazard_screen_exited() -> void:
+	_num_hazards = max(0, _num_hazards - 1)
+	if _num_hazards == 0:
+		_spawn_timer.start()
+
+
+func _on_milestone_reached() -> void:
+	_max_hazards += 1
