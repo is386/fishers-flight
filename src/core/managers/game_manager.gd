@@ -12,6 +12,13 @@ func _ready() -> void:
 	SignalBus.player_died.connect(_on_player_died)
 
 
+func reset() -> void:
+	distance = 0
+	milestone = 1000
+	_is_started = false
+	_distance_increment = 0.2
+
+
 func _physics_process(_delta: float) -> void:
 	if not _is_started:
 		return

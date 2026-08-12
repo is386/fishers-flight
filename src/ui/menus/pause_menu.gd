@@ -11,7 +11,6 @@ func _ready() -> void:
 	exit_to_menu_button.pressed.connect(_on_exit_to_menu_button_pressed)
 
 	SignalBus.game_paused.connect(_on_game_paused)
-	SignalBus.game_resumed.connect(hide)
 
 	visibility_changed.connect(_on_visibility_changed)
 
