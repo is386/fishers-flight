@@ -78,7 +78,8 @@ func _create_block(offset: float, side: int) -> Sprite2D:
 
 
 func _on_body_entered(_body: Node2D) -> void:
-	print("player entered")
+	var player := _body as Player
+	player.die()
 
 
 func _on_timer_timeout() -> void:
