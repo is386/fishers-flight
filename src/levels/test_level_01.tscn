@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ca18ryer10iq8" path="res://assets/art/world/template_tiles.png" id="2_ig8ra"]
 [ext_resource type="PackedScene" uid="uid://bxouwheh3acpy" path="res://src/gameplay/hazard/hazard.tscn" id="3_ig8ra"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rocl4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ig8ra"]
 texture = ExtResource("2_ig8ra")
 0:0/0 = 0
 1:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_xg6m2"]
-sources/2 = SubResource("TileSetAtlasSource_rocl4")
+sources/2 = SubResource("TileSetAtlasSource_ig8ra")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sn2t0"]
 normal = Vector2(0, 1)
@@ -22,6 +22,7 @@ script = ExtResource("1_gilss")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=557284582]
 z_index = 100
+zoom = Vector2(1.5, 1.5)
 
 [node name="Tilemaps" type="Node2D" parent="." unique_id=2126065508]
 
@@ -36,10 +37,10 @@ position = Vector2(0, 52)
 length = 4
 
 [node name="Hazard5" parent="Entities" unique_id=1854127567 instance=ExtResource("3_ig8ra")]
-position = Vector2(-186, -35)
+position = Vector2(148, -19)
 
 [node name="Hazard6" parent="Entities" unique_id=1434695543 instance=ExtResource("3_ig8ra")]
-position = Vector2(-127, 66)
+position = Vector2(184, 73)
 length = 2
 
 [node name="Hazard2" parent="Entities" unique_id=898697006 instance=ExtResource("3_ig8ra")]
@@ -66,14 +67,14 @@ rotating = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Ceiling" unique_id=1118178236]
-position = Vector2(0, -180)
+position = Vector2(0, -120)
 shape = SubResource("WorldBoundaryShape2D_sn2t0")
 
 [node name="Floor" type="StaticBody2D" parent="Entities" unique_id=1478604030]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Floor" unique_id=1220332559]
-position = Vector2(0, 180)
+position = Vector2(0, 120)
 shape = SubResource("WorldBoundaryShape2D_215gw")
 
 [node name="Spawns" type="Node2D" parent="." unique_id=132771635]
