@@ -13,6 +13,7 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var visibility_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _ready() -> void:
 
 	_build_hazard()
 	body_entered.connect(_on_body_entered)
+	visibility_notifier.screen_exited.connect(_on_screen_exited)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,6 +61,8 @@ func _build_hazard() -> void:
 	elif type == HazardType.DIAGONAL_DOWN:
 		rotation_degrees = 45
 
+	visibility_notifier.global_position.x += BLOCK_SIZE * length / 2
+
 
 func _create_block(offset: float, side: int) -> Sprite2D:
 	var block := hazard_block_scene.instantiate() as Sprite2D
@@ -68,3 +72,7 @@ func _create_block(offset: float, side: int) -> Sprite2D:
 
 func _on_body_entered(_body: Node2D) -> void:
 	print("player entered")
+
+
+func _on_screen_exited() -> void:
+	queue_free()

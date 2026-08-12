@@ -48,6 +48,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ScoreDisplay" parent="HudLayer/HudRoot" unique_id=1132020845 node_paths=PackedStringArray("game_manager") instance=ExtResource("4_2uitn")]
+visible = false
 layout_mode = 1
 offset_left = 6.0
 offset_right = 6.0
