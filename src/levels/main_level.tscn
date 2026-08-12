@@ -24,9 +24,10 @@ script = ExtResource("1_ekdx3")
 z_index = 100
 zoom = Vector2(1.5, 1.5)
 
-[node name="HazardSpawner" parent="." unique_id=579838665 node_paths=PackedStringArray("entity_root") instance=ExtResource("3_r31g0")]
+[node name="HazardSpawner" parent="." unique_id=579838665 node_paths=PackedStringArray("entity_root", "camera") instance=ExtResource("3_r31g0")]
 position = Vector2(240, 0)
 entity_root = NodePath("../Entities")
+camera = NodePath("../Camera2D")
 
 [node name="Tilemaps" type="Node2D" parent="." unique_id=1007610773]
 

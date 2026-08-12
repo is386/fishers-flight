@@ -2,8 +2,10 @@ extends Node2D
 
 @export var hazard_scene: PackedScene
 @export var entity_root: Node2D
+@export var camera: Camera2D
 
 var _spawn_timer: Timer
+var _max_y: float
 
 
 func _ready() -> void:
@@ -14,10 +16,24 @@ func _ready() -> void:
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
 
+	_max_y = get_viewport_rect().size.y / camera.zoom.y / 2
+
 
 func _on_spawn_timer_timeout() -> void:
 	var hazard := hazard_scene.instantiate() as Hazard
-	hazard.length = 3
-	hazard.type = hazard.HazardType.HORIZONTAL
-	hazard.global_position = global_position
+	hazard.length = randi_range(3, 5)
+	hazard.type = randi_range(0, 3)
+
+	var y := randf_range(-_max_y, _max_y)
+	var height := hazard.BLOCK_SIZE
+
+	if hazard.type != hazard.HazardType.HORIZONTAL:
+		height = (hazard.length + 1) * (hazard.BLOCK_SIZE / 2)
+
+	if y + height > _max_y:
+		y -= height
+	elif y - height < -_max_y:
+		y += height
+
+	hazard.global_position = Vector2(global_position.x, y)
 	entity_root.add_child(hazard)
