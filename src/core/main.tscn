@@ -45,7 +45,7 @@ mouse_filter = 2
 
 [node name="TitleScreen" parent="MenuLayer/MenuRoot" unique_id=1600000003 instance=ExtResource("3_title")]
 layout_mode = 1
-level_uid = "uid://kikf44gko1yv"
+level_uid = "uid://dtp5hr1fpdoib"
 
 [node name="SettingsMenu" parent="MenuLayer/MenuRoot" unique_id=1910660451 instance=ExtResource("6_settings")]
 visible = false
