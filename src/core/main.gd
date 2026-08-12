@@ -10,6 +10,10 @@ var player: Player = null
 @onready var entity_root: Node2D = %EntityRoot
 @onready var effect_root: Node2D = %EffectRoot
 @onready var menu_layer: CanvasLayer = %MenuLayer
+@onready var hud_root: Control = %HudRoot
+
+var _prev_level_id: String
+var _prev_spawn_id: String
 
 
 func _ready() -> void:
@@ -18,6 +22,7 @@ func _ready() -> void:
 	SignalBus.game_close_requested.connect(_close_game)
 	SignalBus.game_pause_requested.connect(_pause_game)
 	SignalBus.game_resume_requested.connect(_resume_game)
+	SignalBus.game_restart_requested.connect(_restart_game)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -38,7 +43,6 @@ func _resume_game() -> void:
 		return
 
 	get_tree().paused = false
-	SignalBus.game_resumed.emit()
 
 
 func _start_game(level_uid: String, spawn_id: StringName) -> void:
@@ -46,15 +50,27 @@ func _start_game(level_uid: String, spawn_id: StringName) -> void:
 		push_error("Cannot start the game without a level")
 		return
 
+	_prev_level_id = level_uid
+	_prev_spawn_id = spawn_id
+
+	game_manager.reset()
+	hud_root.show()
 	_hide_menus()
 	_init_player()
 	_load_level(level_uid, spawn_id)
 	player.show()
 
 
+func _restart_game() -> void:
+	_clear_world()
+	level_manager.unload_current_level()
+	_start_game(_prev_level_id, _prev_spawn_id)
+
+
 func _exit_to_title() -> void:
 	get_tree().paused = false
 
+	hud_root.hide()
 	_hide_menus()
 	_clear_world()
 
