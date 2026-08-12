@@ -4,7 +4,7 @@ extends Node
 var distance: float = 0
 var milestone: float = 1000
 var _is_started: bool
-var _distance_increment: float = 0.2
+var _distance_increment: float = 0.6
 
 
 func _ready() -> void:

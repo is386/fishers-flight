@@ -10,8 +10,8 @@ size = Vector2(16, 16)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_6ypvc")
-speed = 75.0
-max_speed = 225.0
+speed = 100.0
+max_speed = 250.0
 hazard_block_scene = ExtResource("2_6ypvc")
 
 [node name="Blocks" type="Node2D" parent="." unique_id=1508382442]
@@ -19,3 +19,6 @@ unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1619630274]
 shape = SubResource("RectangleShape2D_sn2t0")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1076452318]
+one_shot = true

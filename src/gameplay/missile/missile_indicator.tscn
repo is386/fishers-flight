@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bds28b6t2rj6"]
+
+[ext_resource type="Texture2D" uid="uid://dqonakx8q6wqe" path="res://assets/art/world/missile_indicator.png" id="1_187mi"]
+[ext_resource type="Script" uid="uid://pk0y7mvrjxj4" path="res://src/gameplay/missile/missile_indicator.gd" id="2_b0ysk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_187mi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_187mi")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="MissileIndicator" type="AnimatedSprite2D" unique_id=1724204209]
+sprite_frames = SubResource("SpriteFrames_187mi")
+autoplay = "default"
+frame_progress = 0.030646589
+script = ExtResource("2_b0ysk")

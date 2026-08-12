@@ -4,20 +4,16 @@ extends Node2D
 @export var entity_root: Node2D
 @export var camera: Camera2D
 
-var _spawn_timer: Timer
 var _max_y: float
 var _max_hazards: int = 1
 var _num_hazards: int = 0
 var _hazard_speed_increment: float = 0
 
+@onready var spawn_timer: Timer = $SpawnTimer
+
 
 func _ready() -> void:
-	_spawn_timer = Timer.new()
-	_spawn_timer.one_shot = false
-	_spawn_timer.autostart = true
-	_spawn_timer.wait_time = 3
-	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	add_child(_spawn_timer)
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 	_max_y = get_viewport_rect().size.y / camera.zoom.y / 2
 
@@ -31,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	if _num_hazards == _max_hazards:
-		_spawn_timer.stop()
+		spawn_timer.stop()
 		return
 
 	_num_hazards += 1
@@ -61,12 +57,12 @@ func _on_spawn_timer_timeout() -> void:
 func _on_hazard_despawned() -> void:
 	_num_hazards = max(0, _num_hazards - 1)
 	if _num_hazards == 0:
-		_spawn_timer.start()
+		spawn_timer.start()
 
 
 func _on_milestone_reached() -> void:
 	_max_hazards += 1
-	_spawn_timer.wait_time = max(0.5, _spawn_timer.wait_time - 0.75)
+	spawn_timer.wait_time = max(0.5, spawn_timer.wait_time - 0.75)
 
 
 func _on_player_died() -> void:
