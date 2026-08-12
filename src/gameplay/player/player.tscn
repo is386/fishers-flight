@@ -10,6 +10,14 @@ size = Vector2(12, 14)
 collision_layer = 2
 script = ExtResource("1_k2146")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=597953095]
+position = Vector2(0, 15)
+amount = 50
+emission_shape = 1
+emission_sphere_radius = 8.0
+scale_amount_max = 4.0
+color = Color(1, 0.5882353, 0, 1)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1828022754]
 texture = ExtResource("2_64h4j")
 
