@@ -39,6 +39,7 @@ func _on_spawn_timer_timeout() -> void:
 	hazard.speed = floor(hazard.speed + _hazard_speed_increment)
 	hazard.length = randi_range(3, 5)
 	hazard.type = randi_range(0, 3)
+	hazard.rotating = randi_range(1, 10) == 5
 
 	var y := randf_range(-_max_y, _max_y)
 	var height := hazard.BLOCK_SIZE
@@ -53,10 +54,11 @@ func _on_spawn_timer_timeout() -> void:
 
 	hazard.global_position = Vector2(global_position.x, y)
 	entity_root.add_child(hazard)
-	hazard.visibility_notifier.screen_exited.connect(_on_hazard_screen_exited)
+	hazard.despawned.connect(_on_hazard_despawned)
 
 
-func _on_hazard_screen_exited() -> void:
+func _on_hazard_despawned() -> void:
+	print("despawned")
 	_num_hazards = max(0, _num_hazards - 1)
 	if _num_hazards == 0:
 		_spawn_timer.start()

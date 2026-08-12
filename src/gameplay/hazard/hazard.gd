@@ -1,6 +1,8 @@
 class_name Hazard
 extends Area2D
 
+signal despawned
+
 const BLOCK_SIZE: float = 16
 
 enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
@@ -14,7 +16,6 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var visibility_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 
 func _ready() -> void:
@@ -23,10 +24,15 @@ func _ready() -> void:
 		return
 
 	_build_hazard()
-	body_entered.connect(_on_body_entered)
-	visibility_notifier.screen_exited.connect(_on_screen_exited)
-
 	speed = min(speed, max_speed)
+
+	body_entered.connect(_on_body_entered)
+
+	var timer := Timer.new()
+	timer.wait_time = (get_viewport_rect().size.x / 1.5 + BLOCK_SIZE * length) / speed
+	timer.autostart = true
+	timer.timeout.connect(_on_timer_timeout)
+	add_child(timer)
 
 
 func _physics_process(delta: float) -> void:
@@ -64,8 +70,6 @@ func _build_hazard() -> void:
 	elif type == HazardType.DIAGONAL_DOWN:
 		rotation_degrees = 45
 
-	visibility_notifier.global_position.x += BLOCK_SIZE * length / 2
-
 
 func _create_block(offset: float, side: int) -> Sprite2D:
 	var block := hazard_block_scene.instantiate() as Sprite2D
@@ -77,5 +81,6 @@ func _on_body_entered(_body: Node2D) -> void:
 	print("player entered")
 
 
-func _on_screen_exited() -> void:
+func _on_timer_timeout() -> void:
+	despawned.emit()
 	queue_free()
