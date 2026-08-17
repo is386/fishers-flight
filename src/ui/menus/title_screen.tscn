@@ -35,7 +35,7 @@ theme_override_constants/separation = 12
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=740623256]
 layout_mode = 2
-text = "Jetpack Joyride"
+text = "Fisher's Flight"
 horizontal_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=1908455271]

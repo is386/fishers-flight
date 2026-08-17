@@ -10,13 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Jetpack Joyride"
+config/name="Fisher's Flight"
 config/version="0.1.0"
 run/main_scene="uid://csehfx88edrj1"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/show_image=false
 boot_splash/use_filter=false
-config/icon="uid://484haw4c6p46"
+config/icon="uid://dibw1uvf5bu3a"
 
 [audio]
 

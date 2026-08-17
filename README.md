@@ -1,3 +1,3 @@
-# jetpack-joyride
+# fishers-flight
 
 Jetpack Joyride made in Godot
