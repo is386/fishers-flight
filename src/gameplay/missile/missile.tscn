@@ -1,23 +1,25 @@
 [gd_scene format=3 uid="uid://d2s3l5p06llwo"]
 
-[ext_resource type="Texture2D" uid="uid://dockc6lvfcbmh" path="res://assets/art/world/hazards.png" id="1_d4h4a"]
 [ext_resource type="Script" uid="uid://e1hfcddmut6g" path="res://src/gameplay/missile/missile.gd" id="2_ai7co"]
+[ext_resource type="Texture2D" uid="uid://wal0eporthgl" path="res://assets/art/world/missile.png" id="2_mg4fu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
-size = Vector2(16, 16)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mcg26"]
+radius = 4.5
 
 [node name="Missile" type="Area2D" unique_id=1748702343]
+scale = Vector2(1.25, 1.25)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_ai7co")
 speed = 600.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=462210563]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_d4h4a")
+texture = ExtResource("2_mg4fu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2003343807]
-shape = SubResource("RectangleShape2D_sn2t0")
+position = Vector2(-1, -0.5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_mcg26")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=979109066]
 position = Vector2(0, -1)

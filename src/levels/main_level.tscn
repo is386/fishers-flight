@@ -65,4 +65,4 @@ position = Vector2(197, 0)
 [node name="Spawns" type="Node2D" parent="." unique_id=1755144550]
 
 [node name="Default" type="Marker2D" parent="Spawns" unique_id=1684587749]
-position = Vector2(-100, 0)
+position = Vector2(-102, 0)

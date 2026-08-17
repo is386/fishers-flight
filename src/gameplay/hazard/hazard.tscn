@@ -1,7 +1,19 @@
 [gd_scene format=3 uid="uid://bxouwheh3acpy"]
 
 [ext_resource type="Script" uid="uid://dp7s5mvft4ns6" path="res://src/gameplay/hazard/hazard.gd" id="1_6ypvc"]
-[ext_resource type="PackedScene" uid="uid://b6an0f2vh3qp3" path="res://src/gameplay/hazard/hazard_block.tscn" id="2_6ypvc"]
+[ext_resource type="Texture2D" uid="uid://dfgeakfyad8x6" path="res://assets/art/world/eel.png" id="2_6ypvc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2oij"]
+atlas = ExtResource("2_6ypvc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhk02"]
+atlas = ExtResource("2_6ypvc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84xno"]
+atlas = ExtResource("2_6ypvc")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
 size = Vector2(16, 16)
@@ -12,7 +24,9 @@ collision_mask = 2
 script = ExtResource("1_6ypvc")
 speed = 100.0
 max_speed = 250.0
-hazard_block_scene = ExtResource("2_6ypvc")
+head_texture = SubResource("AtlasTexture_x2oij")
+body_texture = SubResource("AtlasTexture_bhk02")
+tail_texture = SubResource("AtlasTexture_84xno")
 
 [node name="Blocks" type="Node2D" parent="." unique_id=1508382442]
 unique_name_in_owner = true

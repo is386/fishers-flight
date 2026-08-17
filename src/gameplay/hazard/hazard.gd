@@ -12,7 +12,9 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 @export var rotating: bool = false
 @export var speed: float = 50
 @export var max_speed: float = 200
-@export var hazard_block_scene: PackedScene
+@export var head_texture: AtlasTexture
+@export var body_texture: AtlasTexture
+@export var tail_texture: AtlasTexture
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -20,8 +22,8 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 
 func _ready() -> void:
-	if length <= 0:
-		push_error("Hazard length cannot be less than or equal to 0")
+	if length <= 1:
+		push_error("Hazard length cannot be less than or equal to 1")
 		return
 
 	_build_hazard()
@@ -35,7 +37,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if rotating:
-		rotation += delta
+		rotation -= delta
 
 	global_position.x -= speed * delta
 
@@ -45,7 +47,7 @@ func _build_hazard() -> void:
 	var starting_index := 0
 
 	if not is_even:
-		blocks.add_child(_create_block(0, 1))
+		blocks.add_child(_create_block(0, 1, 0))
 		starting_index = 2
 
 	var pair_num := 1
@@ -53,8 +55,9 @@ func _build_hazard() -> void:
 		var offset := pair_num * BLOCK_SIZE
 		if is_even:
 			offset -= 8
-		blocks.add_child(_create_block(offset, 1))
-		blocks.add_child(_create_block(offset, -1))
+		var is_head_or_tail := i + 2 >= length
+		blocks.add_child(_create_block(offset, 1, is_head_or_tail))
+		blocks.add_child(_create_block(offset, -1, is_head_or_tail))
 		pair_num += 1
 
 	var rectangle := RectangleShape2D.new()
@@ -69,8 +72,16 @@ func _build_hazard() -> void:
 		rotation_degrees = 45
 
 
-func _create_block(offset: float, side: int) -> Sprite2D:
-	var block := hazard_block_scene.instantiate() as Sprite2D
+func _create_block(offset: float, side: int, is_head_or_tail: bool) -> Sprite2D:
+	var block := Sprite2D.new()
+
+	if is_head_or_tail:
+		if side == -1:
+			block.texture = head_texture
+		else:
+			block.texture = tail_texture
+	else:
+		block.texture = body_texture
 	block.global_position.x = offset * side
 	return block
 
