@@ -1,10 +1,23 @@
 [gd_scene format=3 uid="uid://bk2cu2ameptuy"]
 
 [ext_resource type="Script" uid="uid://cl10gatofnexb" path="res://src/gameplay/player/player.gd" id="1_k2146"]
-[ext_resource type="Texture2D" uid="uid://bq5ts8nb6niey" path="res://assets/art/characters/template_player.png" id="2_64h4j"]
+[ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/world/fish.png" id="2_k2146"]
+[ext_resource type="Texture2D" uid="uid://cfyum3gj0tg8o" path="res://assets/art/world/barrel_full.png" id="3_sjr3t"]
+[ext_resource type="Texture2D" uid="uid://xa8nd3ywk01r" path="res://assets/art/characters/fisherman.png" id="4_sjr3t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn2t0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sjr3t")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
-size = Vector2(12, 14)
+size = Vector2(10.5, 22)
 
 [node name="Player" type="CharacterBody2D" unique_id=854491989 groups=["player"]]
 collision_layer = 2
@@ -12,14 +25,19 @@ script = ExtResource("1_k2146")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=597953095]
 position = Vector2(0, 15)
-amount = 50
+amount = 15
+texture = ExtResource("2_k2146")
 emission_shape = 1
 emission_sphere_radius = 8.0
-scale_amount_max = 4.0
-color = Color(1, 0.5882353, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1828022754]
-texture = ExtResource("2_64h4j")
+[node name="BarrelSprite2D" type="Sprite2D" parent="." unique_id=1828022754]
+texture = ExtResource("3_sjr3t")
+
+[node name="FishermanAnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=307453716]
+position = Vector2(11, 0)
+sprite_frames = SubResource("SpriteFrames_sn2t0")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824057970 groups=["player"]]
+position = Vector2(11.25, 0)
 shape = SubResource("RectangleShape2D_sn2t0")
