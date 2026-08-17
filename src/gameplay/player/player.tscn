@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cl10gatofnexb" path="res://src/gameplay/player/player.gd" id="1_k2146"]
 [ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/world/fish.png" id="2_k2146"]
 [ext_resource type="Texture2D" uid="uid://cfyum3gj0tg8o" path="res://assets/art/world/barrel_full.png" id="3_sjr3t"]
-[ext_resource type="Texture2D" uid="uid://xa8nd3ywk01r" path="res://assets/art/characters/fisherman.png" id="4_sjr3t"]
+[ext_resource type="Texture2D" uid="uid://ba4qgi43sk548" path="res://assets/art/characters/fisherman.png" id="4_sjr3t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sn2t0"]
 animations = [{
