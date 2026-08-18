@@ -53,7 +53,7 @@ position = Vector2(0, -120)
 shape = SubResource("WorldBoundaryShape2D_r31g0")
 
 [node name="Floor" type="StaticBody2D" parent="Entities" unique_id=2047017188]
-position = Vector2(0, -1)
+position = Vector2(-4, -39)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Floor" unique_id=119586335]
@@ -62,7 +62,7 @@ shape = SubResource("WorldBoundaryShape2D_b6xw5")
 
 [node name="MissileIndicator" parent="Entities" unique_id=38114684 instance=ExtResource("4_ctyfj")]
 z_index = 100
-position = Vector2(197, 0)
+position = Vector2(186, 0)
 
 [node name="Spawns" type="Node2D" parent="." unique_id=1755144550]
 

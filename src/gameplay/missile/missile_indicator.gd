@@ -17,9 +17,9 @@ func _physics_process(_delta: float) -> void:
 
 func stop_movement() -> void:
 	_stopped = true
-	stop()
+	play("danger")
 
 
 func start_movement() -> void:
 	_stopped = false
-	play()
+	play("flashing")
