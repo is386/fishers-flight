@@ -46,7 +46,6 @@ animations = [{
 
 [node name="MissileIndicator" type="AnimatedSprite2D" unique_id=1724204209]
 sprite_frames = SubResource("SpriteFrames_187mi")
-animation = &"flashing"
+animation = &"danger"
 autoplay = "flashing"
-frame_progress = 0.15317884
 script = ExtResource("2_b0ysk")

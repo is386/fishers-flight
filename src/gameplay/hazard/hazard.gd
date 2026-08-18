@@ -3,7 +3,7 @@ extends Area2D
 
 signal despawned
 
-const BLOCK_SIZE: float = 16
+const BLOCK_SIZE: float = 20
 
 enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
@@ -54,14 +54,14 @@ func _build_hazard() -> void:
 	for i in range(starting_index, length, 2):
 		var offset := pair_num * BLOCK_SIZE
 		if is_even:
-			offset -= 8
+			offset -= BLOCK_SIZE / 2
 		var is_head_or_tail := i + 2 >= length
 		blocks.add_child(_create_block(offset, 1, is_head_or_tail))
 		blocks.add_child(_create_block(offset, -1, is_head_or_tail))
 		pair_num += 1
 
 	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(BLOCK_SIZE * length, BLOCK_SIZE)
+	rectangle.size = Vector2(BLOCK_SIZE * (length - 1), BLOCK_SIZE)
 	collision_shape.shape = rectangle
 
 	if type == HazardType.VERTICAL:

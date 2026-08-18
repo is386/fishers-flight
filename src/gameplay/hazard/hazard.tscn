@@ -5,15 +5,15 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x2oij"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhk02"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84xno"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(32, 0, 16, 16)
+region = Rect2(40, 0, 20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
 size = Vector2(16, 16)
