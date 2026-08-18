@@ -1,21 +1,31 @@
 class_name Barrel
 extends Node2D
 
+@export var fly_speed: float = 100
+@export var fall_speed: float = 100
+@export var acceleration: float = 50
+@export var deceleration: float = 50
+
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
+var _speed: float = 0
+var _is_falling: bool = false
 var _is_dead: bool = false
-var _distance_covered: float = 0
-var _speed: float = 100
 
 
 func _physics_process(delta: float) -> void:
 	if not _is_dead:
 		return
 
-	global_position.y -= _speed * delta
-	_distance_covered += _speed * delta
-	if _distance_covered >= 75:
-		_speed = -100
+	if not _is_falling:
+		_speed = move_toward(_speed, 0, acceleration * delta)
+	else:
+		_speed = move_toward(_speed, fall_speed, deceleration * delta)
+
+	global_position.y += _speed * delta
+
+	if is_equal_approx(_speed, 0):
+		_is_falling = true
 
 
 func start() -> void:
@@ -29,3 +39,4 @@ func stop() -> void:
 func die() -> void:
 	_is_dead = true
 	animator.play("death")
+	_speed = -fly_speed
