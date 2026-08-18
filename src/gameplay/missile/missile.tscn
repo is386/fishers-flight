@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://wal0eporthgl" path="res://assets/art/world/missile.png" id="2_mg4fu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mcg26"]
-radius = 4.5
+radius = 6.5
+height = 44.0
 
 [node name="Missile" type="Area2D" unique_id=1748702343]
-scale = Vector2(1.25, 1.25)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_ai7co")
