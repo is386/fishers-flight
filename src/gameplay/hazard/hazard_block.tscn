@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://b6an0f2vh3qp3"]
-
-[ext_resource type="Texture2D" uid="uid://dockc6lvfcbmh" path="res://assets/art/world/hazards.png" id="1_x2oij"]
-
-[node name="HazardBlock" type="Sprite2D" unique_id=1380999539]
-texture = ExtResource("1_x2oij")

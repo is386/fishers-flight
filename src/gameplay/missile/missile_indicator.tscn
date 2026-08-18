@@ -45,6 +45,7 @@ animations = [{
 }]
 
 [node name="MissileIndicator" type="AnimatedSprite2D" unique_id=1724204209]
+z_index = 20
 sprite_frames = SubResource("SpriteFrames_187mi")
 animation = &"danger"
 autoplay = "flashing"
