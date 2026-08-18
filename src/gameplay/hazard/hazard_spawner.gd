@@ -39,10 +39,10 @@ func _on_spawn_timer_timeout() -> void:
 	hazard.rotating = randi_range(1, 10) == 5
 
 	var y := randf_range(-_max_y, _max_y)
-	var height := hazard.BLOCK_SIZE
+	var height := hazard.block_size
 
 	if hazard.type != hazard.HazardType.HORIZONTAL:
-		height = (hazard.length + 1) * (hazard.BLOCK_SIZE / 2)
+		height = (hazard.length + 1) * (hazard.block_size / 2)
 
 	if y + height > _max_y:
 		y -= height

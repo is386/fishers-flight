@@ -25,6 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel"):
+		hide()
 		SignalBus.game_resume_requested.emit()
 		get_viewport().set_input_as_handled()
 
