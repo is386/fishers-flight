@@ -10,8 +10,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if _stopped or not is_instance_valid(_player):
+	if _stopped:
 		return
+	if not is_instance_valid(_player):
+		_player = get_tree().get_first_node_in_group("player")
 	global_position.y = _player.global_position.y
 
 
