@@ -3,8 +3,6 @@ extends Area2D
 
 signal despawned
 
-const BLOCK_SIZE: float = 20
-
 enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 
 @export var length: int = 1
@@ -20,6 +18,8 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var despawn_timer: Timer = $DespawnTimer
 
+var block_size: float = 21
+
 
 func _ready() -> void:
 	if length <= 1:
@@ -32,7 +32,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 	despawn_timer.timeout.connect(_on_despawn_timer_timeout)
-	despawn_timer.start((get_viewport_rect().size.x / 1.5 + BLOCK_SIZE * length) / speed)
+	despawn_timer.start((get_viewport_rect().size.x / 1.5 + block_size * length) / speed)
 
 
 func _physics_process(delta: float) -> void:
@@ -52,16 +52,16 @@ func _build_hazard() -> void:
 
 	var pair_num := 1
 	for i in range(starting_index, length, 2):
-		var offset := pair_num * BLOCK_SIZE
+		var offset := pair_num * block_size
 		if is_even:
-			offset -= BLOCK_SIZE / 2
+			offset -= block_size / 2
 		var is_head_or_tail := i + 2 >= length
 		blocks.add_child(_create_block(offset, 1, is_head_or_tail))
 		blocks.add_child(_create_block(offset, -1, is_head_or_tail))
 		pair_num += 1
 
 	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(BLOCK_SIZE * (length - 1), BLOCK_SIZE)
+	rectangle.size = Vector2(block_size * (length - 1), block_size)
 	collision_shape.shape = rectangle
 
 	if type == HazardType.VERTICAL:
