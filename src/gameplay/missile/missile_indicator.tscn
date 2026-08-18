@@ -3,22 +3,50 @@
 [ext_resource type="Texture2D" uid="uid://dqonakx8q6wqe" path="res://assets/art/world/missile_indicator.png" id="1_187mi"]
 [ext_resource type="Script" uid="uid://pk0y7mvrjxj4" path="res://src/gameplay/missile/missile_indicator.gd" id="2_b0ysk"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjqoo"]
+atlas = ExtResource("1_187mi")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31hy0"]
+atlas = ExtResource("1_187mi")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0ysk"]
+atlas = ExtResource("1_187mi")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_homxh"]
+atlas = ExtResource("1_187mi")
+region = Rect2(48, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_187mi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_187mi")
+"texture": SubResource("AtlasTexture_sjqoo")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_31hy0")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"danger",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0ysk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_homxh")
+}],
+"loop": 1,
+"name": &"flashing",
 "speed": 10.0
 }]
 
 [node name="MissileIndicator" type="AnimatedSprite2D" unique_id=1724204209]
 sprite_frames = SubResource("SpriteFrames_187mi")
-autoplay = "default"
-frame_progress = 0.93690324
+animation = &"flashing"
+autoplay = "flashing"
+frame_progress = 0.15317884
 script = ExtResource("2_b0ysk")
