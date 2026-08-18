@@ -45,6 +45,7 @@ tile_set = SubResource("TileSet_ekdx3")
 [node name="Entities" type="Node2D" parent="." unique_id=1833761618]
 
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1025102876]
+position = Vector2(0, 1)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Ceiling" unique_id=1814494379]
@@ -52,6 +53,7 @@ position = Vector2(0, -120)
 shape = SubResource("WorldBoundaryShape2D_r31g0")
 
 [node name="Floor" type="StaticBody2D" parent="Entities" unique_id=2047017188]
+position = Vector2(0, -1)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Floor" unique_id=119586335]
