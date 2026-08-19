@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bk2cu2ameptuy"]
 
 [ext_resource type="Script" uid="uid://cl10gatofnexb" path="res://src/gameplay/player/player.gd" id="1_k2146"]
-[ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/world/fish.png" id="2_k2146"]
+[ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/effects/fish.png" id="2_k2146"]
 [ext_resource type="PackedScene" uid="uid://cg6k4eopa0phq" path="res://src/gameplay/player/barrel.tscn" id="4_d3trc"]
 [ext_resource type="Texture2D" uid="uid://brg0o0p0thm0e" path="res://assets/art/characters/fisherman.png" id="4_sjr3t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uia4o"]
+atlas = ExtResource("4_sjr3t")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjr3t"]
 atlas = ExtResource("4_sjr3t")
@@ -23,6 +27,14 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sn2t0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uia4o")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sjr3t")
@@ -54,6 +66,162 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
 size = Vector2(10.5, 30)
 
+[sub_resource type="Animation" id="Animation_d3trc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:offset:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+
+[sub_resource type="Animation" id="Animation_kjyqo"]
+resource_name = "death"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 8.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dxsvo"]
+resource_name = "death"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+
+[sub_resource type="Animation" id="Animation_sjr3t"]
+resource_name = "death"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 8.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3trc"]
+_data = {
+&"RESET": SubResource("Animation_d3trc"),
+&"death": SubResource("Animation_kjyqo"),
+&"death_air": SubResource("Animation_dxsvo"),
+&"death_ground": SubResource("Animation_sjr3t")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=854491989 groups=["player"]]
 z_index = 5
 collision_layer = 2
@@ -70,13 +238,16 @@ initial_velocity_min = 200.0
 initial_velocity_max = 200.0
 
 [node name="Barrel" parent="." unique_id=1297190997 instance=ExtResource("4_d3trc")]
+position = Vector2(0, -1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=307453716]
 position = Vector2(14, 1)
 sprite_frames = SubResource("SpriteFrames_sn2t0")
-animation = &"walking"
-frame_progress = 0.46752504
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824057970]
 position = Vector2(14.25, 1)
 shape = SubResource("RectangleShape2D_sn2t0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1497284938]
+libraries/ = SubResource("AnimationLibrary_d3trc")
