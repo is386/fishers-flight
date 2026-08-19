@@ -7,12 +7,29 @@ extends CharacterBody2D
 @onready var particles: CPUParticles2D = $CPUParticles2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var barrel: Barrel = $Barrel
+@onready var animator: AnimationPlayer = $AnimationPlayer
 
 var _is_dead: bool = false
+var _is_death_emitted: bool = false
 
 
 func _physics_process(delta: float) -> void:
 	if _is_dead:
+		if is_on_floor():
+			if not _is_death_emitted:
+				SignalBus.player_died.emit()
+				_is_death_emitted = true
+			return
+
+		if not is_on_floor() and is_equal_approx(velocity.y, 0) and not animator.current_animation == "death":
+			animator.play("death")
+
+		if velocity.y < 0:
+			velocity.y = move_toward(velocity.y, 0, get_gravity().y / 3 * delta)
+		else:
+			velocity.y = move_toward(velocity.y, fall_speed, get_gravity().y * delta)
+		move_and_slide()
+
 		return
 
 	var vertical_speed := 0.0
@@ -42,8 +59,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+func _play_death_animation() -> void:
+	if is_on_floor():
+		animator.play("death_ground")
+		return
+
+	animator.play("death_air")
+
+
 func die() -> void:
-	SignalBus.player_died.emit()
 	_is_dead = true
+	_play_death_animation()
+	velocity.y = -flying_speed
+	collision_layer = 0
 	particles.emitting = false
 	barrel.die()
+	barrel.reparent(get_tree().current_scene.get_node("World/EntityRoot"))
