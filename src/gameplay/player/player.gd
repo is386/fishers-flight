@@ -68,6 +68,10 @@ func _play_death_animation() -> void:
 
 
 func die() -> void:
+	Engine.time_scale = 0.1
+	await get_tree().create_timer(0.1, true, false, true).timeout
+	Engine.time_scale = 1.0
+
 	_is_dead = true
 	_play_death_animation()
 	velocity.y = -flying_speed
