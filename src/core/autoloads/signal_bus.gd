@@ -21,3 +21,5 @@ signal level_unloading
 signal milestone_reached
 
 signal player_died
+
+signal camera_shake_requested(intensity: float, time: float)

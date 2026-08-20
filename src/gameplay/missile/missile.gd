@@ -31,6 +31,8 @@ func _on_body_entered(_body: Node2D) -> void:
 	explosion.global_position.x -= 24
 	get_tree().current_scene.get_node("World/EffectRoot").add_child(explosion)
 
+	SignalBus.camera_shake_requested.emit(10, 0.65)
+
 
 func _on_screen_exited() -> void:
 	particles.emitting = false
