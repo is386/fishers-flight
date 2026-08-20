@@ -57,6 +57,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Overlay:color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.24705882]
+}
 
 [sub_resource type="Animation" id="Animation_4pdel"]
 resource_name = "explode"
@@ -123,6 +135,18 @@ tracks/4/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Overlay:color:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.24705882, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ctam"]
 _data = {
@@ -162,6 +186,13 @@ initial_velocity_max = 50.0
 angle_min = -220.9
 angle_max = 173.3
 color_ramp = SubResource("Gradient_sn2t0")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1326551282]
+offset_left = -350.0
+offset_top = -200.0
+offset_right = 350.0
+offset_bottom = 200.0
+color = Color(0.96862745, 0.45882353, 0.12941177, 0.24705882)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1313984717]
 libraries/ = SubResource("AnimationLibrary_4ctam")
