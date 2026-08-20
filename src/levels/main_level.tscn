@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cl227khj50s7w" path="res://src/levels/base_level.gd" id="1_ekdx3"]
 [ext_resource type="Texture2D" uid="uid://ca18ryer10iq8" path="res://assets/art/world/template_tiles.png" id="1_rafda"]
+[ext_resource type="Script" uid="uid://n4tloql4bxh7" path="res://src/components/shaking_camera.gd" id="2_11df1"]
 [ext_resource type="PackedScene" uid="uid://b2gq5qr5wh064" path="res://src/gameplay/missile/missile_spawner.tscn" id="3_b6xw5"]
+[ext_resource type="Script" uid="uid://dyx7rusvjk4v7" path="res://src/components/shaking_component.gd" id="3_k0jp4"]
 [ext_resource type="PackedScene" uid="uid://d20326piao2gm" path="res://src/gameplay/hazard/hazard_spawner.tscn" id="3_r31g0"]
 [ext_resource type="PackedScene" uid="uid://bds28b6t2rj6" path="res://src/gameplay/missile/missile_indicator.tscn" id="4_ctyfj"]
 
@@ -22,18 +24,21 @@ normal = Vector2(0, 1)
 [node name="MainLevel" type="Node2D" unique_id=1354998572]
 script = ExtResource("1_ekdx3")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2033672859]
+[node name="ShakingCamera" type="Camera2D" parent="." unique_id=2033672859]
 z_index = 100
 zoom = Vector2(1.5, 1.5)
+script = ExtResource("2_11df1")
 
-[node name="HazardSpawner" parent="." unique_id=579838665 node_paths=PackedStringArray("entity_root", "camera") instance=ExtResource("3_r31g0")]
+[node name="ShakingComponent" type="Node" parent="ShakingCamera" unique_id=790497587]
+script = ExtResource("3_k0jp4")
+metadata/_custom_type_script = "uid://dyx7rusvjk4v7"
+
+[node name="HazardSpawner" parent="." unique_id=579838665 node_paths=PackedStringArray("camera") instance=ExtResource("3_r31g0")]
 position = Vector2(240, 0)
-entity_root = NodePath("../Entities")
-camera = NodePath("../Camera2D")
+camera = NodePath("../ShakingCamera")
 
-[node name="MissileSpawner" parent="." unique_id=1146834668 node_paths=PackedStringArray("entity_root", "missile_indicator") instance=ExtResource("3_b6xw5")]
+[node name="MissileSpawner" parent="." unique_id=1146834668 node_paths=PackedStringArray("missile_indicator") instance=ExtResource("3_b6xw5")]
 position = Vector2(257, 0)
-entity_root = NodePath("../Entities")
 missile_indicator = NodePath("../Entities/MissileIndicator")
 
 [node name="Tilemaps" type="Node2D" parent="." unique_id=1007610773]
