@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var hazard_scene: PackedScene
-@export var entity_root: Node2D
 @export var camera: Camera2D
 
 var _max_y: float
@@ -50,7 +49,7 @@ func _on_spawn_timer_timeout() -> void:
 		y += height
 
 	hazard.global_position = Vector2(global_position.x, y)
-	entity_root.add_child(hazard)
+	get_tree().current_scene.get_node("World/EntityRoot").add_child(hazard)
 	hazard.despawned.connect(_on_hazard_despawned)
 
 

@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var missile_scene: PackedScene
-@export var entity_root: Node2D
 @export var missile_indicator: MissileIndicator
 
 var _player: Player
@@ -37,7 +36,7 @@ func _on_shoot_timer_timeout() -> void:
 	missile_indicator.hide()
 	var missile := missile_scene.instantiate() as Missile
 	missile.global_position = Vector2(global_position.x, missile_indicator.global_position.y)
-	entity_root.add_child(missile)
+	get_tree().current_scene.get_node("World/EntityRoot").add_child(missile)
 
 
 func _on_player_died() -> void:
