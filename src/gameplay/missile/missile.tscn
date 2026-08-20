@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2s3l5p06llwo"]
 
 [ext_resource type="Texture2D" uid="uid://bfs7bq0jrj2mi" path="res://assets/art/effects/bubble.png" id="2_0ecp3"]
+[ext_resource type="PackedScene" uid="uid://bsyutvdaellek" path="res://src/effects/explosion.tscn" id="2_48kdo"]
 [ext_resource type="Script" uid="uid://e1hfcddmut6g" path="res://src/gameplay/missile/missile.gd" id="2_ai7co"]
 [ext_resource type="Texture2D" uid="uid://wal0eporthgl" path="res://assets/art/world/missile.png" id="2_mg4fu"]
 
@@ -21,6 +22,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_ai7co")
 speed = 600.0
+explosion_scene = ExtResource("2_48kdo")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1223836815]
 position = Vector2(22, 0)
