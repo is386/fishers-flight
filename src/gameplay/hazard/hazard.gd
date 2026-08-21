@@ -15,6 +15,7 @@ const BLOCK_SIZE = 12.0
 @export var head_textures: Array[AtlasTexture]
 @export var body_texture: AtlasTexture
 @export var tail_textures: Array[AtlasTexture]
+@export var screen_flash_scene: PackedScene
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -98,6 +99,11 @@ func _create_block(offset: float, side: int) -> Sprite2D:
 func _on_body_entered(_body: Node2D) -> void:
 	var player := _body as Player
 	player.die()
+
+	var screen_flash := screen_flash_scene.instantiate() as Node
+	get_tree().current_scene.get_node("World/EffectRoot").add_child(screen_flash)
+
+	SignalBus.camera_shake_requested.emit(3, 0.35)
 
 
 func _on_despawn_timer_timeout() -> void:
