@@ -1,19 +1,27 @@
 [gd_scene format=3 uid="uid://bxouwheh3acpy"]
 
 [ext_resource type="Script" uid="uid://dp7s5mvft4ns6" path="res://src/gameplay/hazard/hazard.gd" id="1_6ypvc"]
-[ext_resource type="Texture2D" uid="uid://dfgeakfyad8x6" path="res://assets/art/world/eel.png" id="2_6ypvc"]
+[ext_resource type="Texture2D" uid="uid://vf32kiis2kt0" path="res://assets/art/world/eel2.png" id="2_6ypvc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2oij"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcrmb"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(0, 0, 21, 21)
+region = Rect2(0, 0, 12, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bhk02"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_or3aa"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(21, 0, 21, 21)
+region = Rect2(12, 0, 12, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_84xno"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm40i"]
 atlas = ExtResource("2_6ypvc")
-region = Rect2(42, 0, 21, 21)
+region = Rect2(24, 0, 12, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7q0l"]
+atlas = ExtResource("2_6ypvc")
+region = Rect2(48, 0, 12, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlf45"]
+atlas = ExtResource("2_6ypvc")
+region = Rect2(60, 0, 12, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
 size = Vector2(16, 16)
@@ -25,9 +33,11 @@ collision_mask = 2
 script = ExtResource("1_6ypvc")
 speed = 100.0
 max_speed = 250.0
-head_texture = SubResource("AtlasTexture_x2oij")
-body_texture = SubResource("AtlasTexture_bhk02")
-tail_texture = SubResource("AtlasTexture_84xno")
+head_texture = SubResource("AtlasTexture_jcrmb")
+head_texture2 = SubResource("AtlasTexture_or3aa")
+body_texture = SubResource("AtlasTexture_rm40i")
+tail_texture = SubResource("AtlasTexture_n7q0l")
+tail_texture2 = SubResource("AtlasTexture_nlf45")
 
 [node name="Blocks" type="Node2D" parent="." unique_id=1508382442]
 unique_name_in_owner = true
