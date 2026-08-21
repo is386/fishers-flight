@@ -7,6 +7,7 @@ extends Node2D
 @export var deceleration: float = 50
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var _speed: float = 0
 var _is_falling: bool = false

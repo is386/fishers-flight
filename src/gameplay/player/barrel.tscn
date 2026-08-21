@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdwx30srqrpfj" path="res://src/gameplay/player/barrel.gd" id="1_jhf6g"]
 [ext_resource type="Texture2D" uid="uid://6iqmpxwptmhp" path="res://assets/art/world/barrel.png" id="1_t3xch"]
+[ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/effects/fish.png" id="2_knvb2"]
 
 [sub_resource type="Animation" id="Animation_sjr3t"]
 length = 0.001
@@ -79,6 +80,16 @@ fly_speed = 125.0
 fall_speed = 240.0
 acceleration = 100.0
 deceleration = 150.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=60080665]
+position = Vector2(0, 15)
+amount = 35
+texture = ExtResource("2_knvb2")
+direction = Vector2(0, 1)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2051525658]
 texture = ExtResource("1_t3xch")
