@@ -8,16 +8,25 @@ extends CharacterBody2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var walking_particles: CPUParticles2D = $WalkingParticles
 @onready var landing_particles: CPUParticles2D = $LandingParticles
+@onready var sliding_particles: CPUParticles2D = $SlidingParticles
 @onready var barrel: Barrel = $Barrel
 
+var _game_manager: GameManager
 var _is_dead: bool = false
 var _is_death_emitted: bool = false
 var _was_on_floor: bool = false
 
 
+func _ready() -> void:
+	_game_manager = get_tree().get_first_node_in_group("game_manager")
+
+
 func _physics_process(delta: float) -> void:
 	if _is_dead:
+		walking_particles.emitting = false
+
 		if is_on_floor():
+			sliding_particles.emitting = _game_manager.speed != 0
 			if not _is_death_emitted:
 				SignalBus.player_died.emit()
 				_is_death_emitted = true

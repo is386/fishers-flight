@@ -3,25 +3,23 @@ extends Node2D
 @export var hazard_scene: PackedScene
 @export var camera: Camera2D
 
+var _game_manager: GameManager
 var _max_y: float
-var _max_hazards: int = 1
+var _max_hazards: int = 2
 var _num_hazards: int = 0
-var _hazard_speed_increment: float = 0
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
 
 func _ready() -> void:
+	_game_manager = get_tree().get_first_node_in_group("game_manager")
+
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 	_max_y = get_viewport_rect().size.y / camera.zoom.y / 2
 
 	SignalBus.milestone_reached.connect(_on_milestone_reached)
 	SignalBus.player_died.connect(_on_player_died)
-
-
-func _physics_process(_delta: float) -> void:
-	_hazard_speed_increment += 0.006
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -32,12 +30,12 @@ func _on_spawn_timer_timeout() -> void:
 	_num_hazards += 1
 
 	var hazard := hazard_scene.instantiate() as Hazard
-	hazard.speed = floor(hazard.speed + _hazard_speed_increment)
+	hazard.speed = _game_manager.speed
 	hazard.length = randi_range(6, 8)
 	hazard.type = randi_range(0, 3)
 	hazard.rotating = randi_range(1, 10) == 5
 
-	var y := randf_range(-_max_y, _max_y)
+	var y := randf_range(-_max_y, _max_y - 66)
 	var height := hazard.BLOCK_SIZE
 
 	if hazard.type != hazard.HazardType.HORIZONTAL:
@@ -60,7 +58,7 @@ func _on_hazard_despawned() -> void:
 
 
 func _on_milestone_reached() -> void:
-	_max_hazards += 1
+	_max_hazards = min(_max_hazards + 1, 4)
 	spawn_timer.wait_time = max(0.5, spawn_timer.wait_time - 0.75)
 
 

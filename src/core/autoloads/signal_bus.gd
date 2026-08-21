@@ -11,8 +11,6 @@ signal game_pause_requested
 signal game_paused
 signal game_resume_requested
 
-## A screen wants the settings menu opened. It passes itself so Back knows
-## where to return to.
 signal settings_requested(return_to: Control)
 
 signal level_loaded
