@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bds28b6t2rj6" path="res://src/gameplay/missile/missile_indicator.tscn" id="4_ctyfj"]
 [ext_resource type="Texture2D" uid="uid://ift58os8laci" path="res://assets/art/world/dock.png" id="7_1du40"]
 [ext_resource type="Script" uid="uid://cc4hwqfj3sfwv" path="res://src/levels/background.gd" id="7_tygi3"]
+[ext_resource type="PackedScene" uid="uid://fk7au4wngkmw" path="res://src/effects/shadow.tscn" id="9_twkqo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rafda"]
 texture = ExtResource("1_rafda")
@@ -62,6 +63,9 @@ position = Vector2(0, 77)
 texture = ExtResource("7_1du40")
 
 [node name="Entities" type="Node2D" parent="." unique_id=1833761618]
+
+[node name="Shadow" parent="Entities" unique_id=444811924 instance=ExtResource("9_twkqo")]
+position = Vector2(-93, 52)
 
 [node name="Ceiling" type="StaticBody2D" parent="Entities" unique_id=1025102876]
 position = Vector2(0, 2)

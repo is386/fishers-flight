@@ -7,6 +7,7 @@ var _stopped: bool = false
 
 func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player")
+	SignalBus.player_died.connect(_on_player_died)
 
 
 func _physics_process(_delta: float) -> void:
@@ -25,3 +26,7 @@ func stop_movement() -> void:
 func start_movement() -> void:
 	_stopped = false
 	play("flashing")
+
+
+func _on_player_died() -> void:
+	hide()
