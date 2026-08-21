@@ -4,10 +4,10 @@ extends CharacterBody2D
 @export var flying_speed: float = 200
 @export var fall_speed: float = 300
 
-@onready var particles: CPUParticles2D = $CPUParticles2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var barrel: Barrel = $Barrel
 @onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var walking_particles: CPUParticles2D = $WalkingParticles
+@onready var barrel: Barrel = $Barrel
 
 var _is_dead: bool = false
 var _is_death_emitted: bool = false
@@ -35,19 +35,21 @@ func _physics_process(delta: float) -> void:
 	var vertical_speed := 0.0
 
 	if not is_on_floor():
+		walking_particles.emitting = false
 		barrel.stop()
 
 	if Input.is_action_pressed("fly"):
 		vertical_speed = -flying_speed
-		particles.emitting = true
+		barrel.particles.emitting = true
 		sprite.play("flying")
 	elif not is_on_floor():
 		vertical_speed = fall_speed
-		particles.emitting = false
+		barrel.particles.emitting = false
 		sprite.play("falling")
 	elif is_on_floor():
 		sprite.play("walking")
 		barrel.start()
+		walking_particles.emitting = true
 
 	velocity.y = move_toward(velocity.y, vertical_speed, get_gravity().y * delta)
 	move_and_slide()
@@ -76,6 +78,6 @@ func die() -> void:
 	_play_death_animation()
 	velocity.y = -flying_speed
 	collision_layer = 0
-	particles.emitting = false
+	barrel.particles.emitting = false
 	barrel.die()
 	barrel.reparent(get_tree().current_scene.get_node("World/EntityRoot"))
