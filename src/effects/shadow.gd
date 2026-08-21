@@ -11,6 +11,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not _player:
+		return
+
 	if _player.is_on_floor():
 		scale = Vector2(SCALE, SCALE)
 	else:
