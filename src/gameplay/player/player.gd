@@ -7,10 +7,12 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var walking_particles: CPUParticles2D = $WalkingParticles
+@onready var landing_particles: CPUParticles2D = $LandingParticles
 @onready var barrel: Barrel = $Barrel
 
 var _is_dead: bool = false
 var _is_death_emitted: bool = false
+var _was_on_floor: bool = false
 
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +36,8 @@ func _physics_process(delta: float) -> void:
 
 	var vertical_speed := 0.0
 
+	landing_particles.emitting = not _was_on_floor and is_on_floor()
+
 	if not is_on_floor():
 		walking_particles.emitting = false
 		barrel.stop()
@@ -50,6 +54,8 @@ func _physics_process(delta: float) -> void:
 		sprite.play("walking")
 		barrel.start()
 		walking_particles.emitting = true
+
+	_was_on_floor = is_on_floor()
 
 	velocity.y = move_toward(velocity.y, vertical_speed, get_gravity().y * delta)
 	move_and_slide()
