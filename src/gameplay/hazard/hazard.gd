@@ -1,9 +1,11 @@
 class_name Hazard
 extends Area2D
 
+enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
+
 signal despawned
 
-enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
+const BLOCK_SIZE = 12.0
 
 @export var length: int = 1
 @export var type: HazardType = HazardType.HORIZONTAL
@@ -11,22 +13,21 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 @export var speed: float = 50
 @export var max_speed: float = 200
 @export var head_texture: AtlasTexture
+@export var head_texture2: AtlasTexture
 @export var body_texture: AtlasTexture
 @export var tail_texture: AtlasTexture
+@export var tail_texture2: AtlasTexture
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var despawn_timer: Timer = $DespawnTimer
 
-var block_size: float = 21
 var _blocks: Array[Sprite2D]
-var _current_block: int = 0
-var _time: float = 0
 
 
 func _ready() -> void:
-	if length <= 1:
-		push_error("Hazard length cannot be less than or equal to 1")
+	if length <= 3:
+		push_error("Hazard length cannot be less than or equal to 3")
 		return
 
 	_build_hazard()
@@ -35,7 +36,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 	despawn_timer.timeout.connect(_on_despawn_timer_timeout)
-	despawn_timer.start((get_viewport_rect().size.x / 1.5 + block_size * length) / speed)
+	despawn_timer.start((get_viewport_rect().size.x / 1.5 + BLOCK_SIZE * length * 2) / speed)
 
 
 func _physics_process(delta: float) -> void:
@@ -44,37 +45,26 @@ func _physics_process(delta: float) -> void:
 
 	global_position.x -= speed * delta
 
-	_time += delta
-	if _time >= 0.15:
-		var next_block := _current_block + 1
-		if next_block == length:
-			next_block = 0
-		_blocks[next_block].offset.y = -1
-		_blocks[_current_block].offset.y = 0
-		_current_block = next_block
-		_time = 0
-
 
 func _build_hazard() -> void:
 	var is_even := length % 2 == 0
 	var starting_index := 0
 
 	if not is_even:
-		blocks.add_child(_create_block(0, 1, 0))
+		blocks.add_child(_create_block(0, 1))
 		starting_index = 2
 
 	var pair_num := 1
 	for i in range(starting_index, length, 2):
-		var offset := pair_num * block_size
+		var offset := pair_num * BLOCK_SIZE
 		if is_even:
-			offset -= block_size / 2
-		var is_head_or_tail := i + 2 >= length
-		blocks.add_child(_create_block(offset, 1, is_head_or_tail))
-		blocks.add_child(_create_block(offset, -1, is_head_or_tail))
+			offset -= BLOCK_SIZE / 2
+		blocks.add_child(_create_block(offset, 1))
+		blocks.add_child(_create_block(offset, -1))
 		pair_num += 1
 
 	var rectangle := RectangleShape2D.new()
-	rectangle.size = Vector2(block_size * (length - 1), block_size)
+	rectangle.size = Vector2(BLOCK_SIZE * (length - 1), BLOCK_SIZE)
 	collision_shape.shape = rectangle
 
 	if type == HazardType.VERTICAL:
@@ -89,6 +79,11 @@ func _build_hazard() -> void:
 		rotation_degrees = 45
 		_blocks.sort_custom(_sort_blocks_x)
 
+	_blocks[0].texture = head_texture
+	_blocks[1].texture = head_texture2
+	_blocks[length - 1].texture = tail_texture2
+	_blocks[length - 2].texture = tail_texture
+
 
 func _sort_blocks_x(a: Sprite2D, b: Sprite2D) -> bool:
 	return a.global_position.x <= b.global_position.x
@@ -98,17 +93,11 @@ func _sort_blocks_y(a: Sprite2D, b: Sprite2D) -> bool:
 	return a.global_position.y <= b.global_position.y
 
 
-func _create_block(offset: float, side: int, is_head_or_tail: bool) -> Sprite2D:
+func _create_block(offset: float, side: int) -> Sprite2D:
 	var block := Sprite2D.new()
 	_blocks.append(block)
 
-	if is_head_or_tail:
-		if side == -1:
-			block.texture = head_texture
-		else:
-			block.texture = tail_texture
-	else:
-		block.texture = body_texture
+	block.texture = body_texture
 	block.global_position.x = offset * side
 	return block
 
