@@ -12,11 +12,9 @@ const BLOCK_SIZE = 12.0
 @export var rotating: bool = false
 @export var speed: float = 50
 @export var max_speed: float = 200
-@export var head_texture: AtlasTexture
-@export var head_texture2: AtlasTexture
+@export var head_textures: Array[AtlasTexture]
 @export var body_texture: AtlasTexture
-@export var tail_texture: AtlasTexture
-@export var tail_texture2: AtlasTexture
+@export var tail_textures: Array[AtlasTexture]
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -26,8 +24,9 @@ var _blocks: Array[Sprite2D]
 
 
 func _ready() -> void:
-	if length <= 3:
-		push_error("Hazard length cannot be less than or equal to 3")
+	var min_length := head_textures.size() + tail_textures.size()
+	if length < min_length:
+		push_error("Hazard length cannot be less than %d" % min_length)
 		return
 
 	_build_hazard()
@@ -63,34 +62,28 @@ func _build_hazard() -> void:
 		blocks.add_child(_create_block(offset, -1))
 		pair_num += 1
 
+	_blocks.sort_custom(_sort_blocks)
+
+	for i in head_textures.size():
+		_blocks[i].texture = head_textures[i]
+
+	for i in tail_textures.size():
+		_blocks[length - tail_textures.size() + i].texture = tail_textures[i]
+
 	var rectangle := RectangleShape2D.new()
 	rectangle.size = Vector2(BLOCK_SIZE * (length - 1), BLOCK_SIZE)
 	collision_shape.shape = rectangle
 
 	if type == HazardType.VERTICAL:
 		rotation_degrees = 90
-		_blocks.sort_custom(_sort_blocks_y)
-	elif type == HazardType.HORIZONTAL:
-		_blocks.sort_custom(_sort_blocks_x)
 	elif type == HazardType.DIAGONAL_UP:
 		rotation_degrees = -45
-		_blocks.sort_custom(_sort_blocks_x)
 	elif type == HazardType.DIAGONAL_DOWN:
 		rotation_degrees = 45
-		_blocks.sort_custom(_sort_blocks_x)
-
-	_blocks[0].texture = head_texture
-	_blocks[1].texture = head_texture2
-	_blocks[length - 1].texture = tail_texture2
-	_blocks[length - 2].texture = tail_texture
 
 
-func _sort_blocks_x(a: Sprite2D, b: Sprite2D) -> bool:
+func _sort_blocks(a: Sprite2D, b: Sprite2D) -> bool:
 	return a.global_position.x <= b.global_position.x
-
-
-func _sort_blocks_y(a: Sprite2D, b: Sprite2D) -> bool:
-	return a.global_position.y <= b.global_position.y
 
 
 func _create_block(offset: float, side: int) -> Sprite2D:
