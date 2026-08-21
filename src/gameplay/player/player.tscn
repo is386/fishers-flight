@@ -67,7 +67,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sn2t0"]
-size = Vector2(10.5, 30)
+size = Vector2(19.5, 30)
 
 [sub_resource type="Animation" id="Animation_d3trc"]
 length = 0.001
@@ -248,6 +248,21 @@ scale_amount_min = 2.0
 scale_amount_max = 4.0
 color_ramp = SubResource("Gradient_k2146")
 
+[node name="SlidingParticles" type="CPUParticles2D" parent="." unique_id=1505553140]
+position = Vector2(5, 16)
+emitting = false
+amount = 12
+direction = Vector2(-1, -0.5)
+spread = 22.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+damping_min = 2.565
+damping_max = 30.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_k2146")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=307453716]
 position = Vector2(14, 1)
 sprite_frames = SubResource("SpriteFrames_sn2t0")
@@ -271,7 +286,7 @@ scale_amount_max = 4.0
 color_ramp = SubResource("Gradient_k2146")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1824057970]
-position = Vector2(14.25, 1)
+position = Vector2(9.75, 1)
 shape = SubResource("RectangleShape2D_sn2t0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1497284938]

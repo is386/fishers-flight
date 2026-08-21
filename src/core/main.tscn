@@ -16,7 +16,7 @@ script = ExtResource("1_avv2o")
 
 [node name="Managers" type="Node" parent="." unique_id=44772124]
 
-[node name="GameManager" type="Node" parent="Managers" unique_id=2075326863]
+[node name="GameManager" type="Node" parent="Managers" unique_id=2075326863 groups=["game_manager"]]
 unique_name_in_owner = true
 process_mode = 1
 script = ExtResource("2_nxx65")
