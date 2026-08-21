@@ -35,6 +35,7 @@ func _on_game_paused() -> void:
 
 
 func _on_resume_button_pressed() -> void:
+	hide()
 	SignalBus.game_resume_requested.emit()
 
 

@@ -24,6 +24,9 @@ normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b6xw5"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sn2t0"]
+polygon = PackedVector2Array(-213, 48, 213, 48, 214, 125, -213, 124)
+
 [node name="MainLevel" type="Node2D" unique_id=1354998572]
 script = ExtResource("1_ekdx3")
 
@@ -55,10 +58,11 @@ tile_set = SubResource("TileSet_ekdx3")
 [node name="Dock" type="Parallax2D" parent="Background" unique_id=515557711]
 repeat_size = Vector2(96, 0)
 autoscroll = Vector2(-100, 0)
-repeat_times = 10000
+repeat_times = 1000
 script = ExtResource("7_tygi3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Dock" unique_id=1441141960]
+y_sort_enabled = true
 position = Vector2(0, 77)
 texture = ExtResource("7_1du40")
 
@@ -91,3 +95,6 @@ position = Vector2(186, 0)
 
 [node name="Default" type="Marker2D" parent="Spawns" unique_id=1684587749]
 position = Vector2(-102, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1701911251]
+occluder = SubResource("OccluderPolygon2D_sn2t0")
