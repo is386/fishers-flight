@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://8mu725g5nk5x" path="res://src/ui/menus/pause_menu.gd" id="1_pause"]
 
 [node name="PauseMenu" type="Control" unique_id=822988843]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
