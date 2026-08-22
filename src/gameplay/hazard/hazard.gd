@@ -19,6 +19,8 @@ const BOB_AMPLITUDE = 1.25
 @export var body_texture: AtlasTexture
 @export var tail_textures: Array[AtlasTexture]
 @export var screen_flash_scene: PackedScene
+@export var zap_sound: AudioStream
+@export var zap_volume_db: float = 0.0
 
 @onready var blocks: Node2D = %Blocks
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -107,6 +109,8 @@ func _create_block(offset: float, side: int) -> Sprite2D:
 
 
 func _on_body_entered(_body: Node2D) -> void:
+	AudioBus.play_sfx(zap_sound, zap_volume_db)
+
 	var player := _body as Player
 	player.die()
 

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ctfib7m441jbs" path="res://src/core/main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://drtbq8p1jgjmi" path="res://src/core/managers/game_manager.gd" id="2_gamemgr"]
 [ext_resource type="PackedScene" uid="uid://dtp5hr1fpdoib" path="res://src/levels/main_level.tscn" id="3_level"]
+[ext_resource type="AudioStream" uid="uid://ci8b67mh65euk" path="res://assets/audio/music/music.ogg" id="4_0g4b3"]
 [ext_resource type="PackedScene" uid="uid://bk2cu2ameptuy" path="res://src/gameplay/player/player.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://b6qebhq6xggvu" path="res://src/ui/hud/score_display.tscn" id="5_score"]
 [ext_resource type="Texture2D" uid="uid://dqspxlsleww88" path="res://assets/art/ui/icons.png" id="6_7o0du"]
@@ -42,6 +43,7 @@ process_mode = 3
 script = ExtResource("1_main")
 level_scene = ExtResource("3_level")
 player_scene = ExtResource("4_player")
+music = ExtResource("4_0g4b3")
 
 [node name="GameManager" type="Node" parent="." unique_id=2075326863 groups=["game_manager"]]
 unique_name_in_owner = true

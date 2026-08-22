@@ -2,6 +2,7 @@ extends Node
 
 @export var level_scene: PackedScene
 @export var player_scene: PackedScene
+@export var music: AudioStream
 
 var level: BaseLevel = null
 var player: Player = null
@@ -18,6 +19,7 @@ func _ready() -> void:
 	SignalBus.game_pause_requested.connect(_pause_game)
 	SignalBus.game_resume_requested.connect(_resume_game)
 	_build_world()
+	AudioBus.play_music(music)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -27,6 +29,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _start_game() -> void:
 	game_manager.reset()
+	if not AudioBus._music_player.playing:
+		AudioBus.play_music(music)
 	SignalBus.level_loaded.emit()
 
 
@@ -40,12 +44,14 @@ func _pause_game() -> void:
 	if get_tree().paused:
 		return
 
+	AudioBus._music_player.stream_paused = true
 	get_tree().paused = true
 	SignalBus.game_paused.emit()
 
 
 func _resume_game() -> void:
 	get_tree().paused = false
+	AudioBus._music_player.stream_paused = false
 
 
 func _build_world() -> void:

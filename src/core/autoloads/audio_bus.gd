@@ -6,6 +6,9 @@ const SFX_BUS: StringName = &"SFX"
 
 const SFX_POOL_SIZE: int = 8
 
+## Music sits under the sound effects; the Music bus scales on top of this.
+const MUSIC_VOLUME_DB: float = -2.5
+
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _music_player: AudioStreamPlayer = null
 var _music_loops: bool = true
@@ -15,19 +18,21 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	_music_player = _create_player(MUSIC_BUS)
+	_music_player.volume_db = MUSIC_VOLUME_DB
 	_music_player.finished.connect(_on_music_finished)
 
 	for _i: int in SFX_POOL_SIZE:
 		_sfx_players.append(_create_player(SFX_BUS))
 
 
-func play_sfx(stream: AudioStream) -> void:
+func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
 	if stream == null:
 		return
 
 	for _sfx_player: AudioStreamPlayer in _sfx_players:
 		if not _sfx_player.playing:
 			_sfx_player.stream = stream
+			_sfx_player.volume_db = volume_db
 			_sfx_player.play()
 			return
 

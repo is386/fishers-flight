@@ -1,6 +1,9 @@
 class_name MissileIndicator
 extends AnimatedSprite2D
 
+@export var warning_sound: AudioStream
+@export var warning_volume_db: float = -2.0
+
 var _player: Player
 var _stopped: bool = false
 
@@ -19,6 +22,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func stop_movement() -> void:
+	AudioBus.play_sfx(warning_sound, warning_volume_db)
+
 	_stopped = true
 	play("danger")
 

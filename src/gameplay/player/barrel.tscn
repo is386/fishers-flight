@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cdwx30srqrpfj" path="res://src/gameplay/player/barrel.gd" id="1_jhf6g"]
 [ext_resource type="Texture2D" uid="uid://6iqmpxwptmhp" path="res://assets/art/world/barrel.png" id="1_t3xch"]
 [ext_resource type="Texture2D" uid="uid://d2uom80s3fhtk" path="res://assets/art/effects/fish.png" id="2_knvb2"]
+[ext_resource type="AudioStream" uid="uid://bm4kwyls21x8t" path="res://assets/audio/sfx/jetpack.wav" id="3_jp8kd"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_215gw"]
 particle_flag_disable_z = true
@@ -99,6 +100,11 @@ process_material = SubResource("ParticleProcessMaterial_215gw")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2051525658]
 texture = ExtResource("1_t3xch")
 offset = Vector2(-0.032381587, 0)
+
+[node name="JetpackAudio" type="AudioStreamPlayer" parent="." unique_id=1093477215]
+stream = ExtResource("3_jp8kd")
+volume_db = -7.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1822946555]
 libraries/ = SubResource("AnimationLibrary_dxsvo")

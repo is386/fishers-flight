@@ -8,6 +8,7 @@ extends Node2D
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var particles: GPUParticles2D = $GPUParticles2D
+@onready var jetpack_audio: AudioStreamPlayer = $JetpackAudio
 
 var _speed: float = 0
 var _is_falling: bool = false
@@ -37,7 +38,18 @@ func stop() -> void:
 	animator.play("RESET")
 
 
+func set_jetpack_playing(is_playing: bool) -> void:
+	if is_playing == jetpack_audio.playing:
+		return
+
+	if is_playing:
+		jetpack_audio.play()
+	else:
+		jetpack_audio.stop()
+
+
 func die() -> void:
+	set_jetpack_playing(false)
 	_is_dead = true
 	animator.play("death")
 	_speed = -fly_speed

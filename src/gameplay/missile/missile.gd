@@ -3,6 +3,10 @@ extends Area2D
 
 @export var speed: float = 200
 @export var explosion_scene: PackedScene
+@export var whoosh_sound: AudioStream
+@export var whoosh_volume_db: float = -10.5
+@export var explosion_sound: AudioStream
+@export var explosion_volume_db: float = -9.5
 
 @onready var visibility_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var particles: CPUParticles2D = $CPUParticles2D
@@ -13,6 +17,7 @@ func _ready() -> void:
 	visibility_notifier.screen_exited.connect(_on_screen_exited)
 	body_entered.connect(_on_body_entered)
 	particles.finished.connect(_on_particles_finished)
+	AudioBus.play_sfx(whoosh_sound, whoosh_volume_db)
 
 
 func _physics_process(delta: float) -> void:
@@ -20,6 +25,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(_body: Node2D) -> void:
+	AudioBus.play_sfx(explosion_sound, explosion_volume_db)
+
 	var player := _body as Player
 	player.die()
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqonakx8q6wqe" path="res://assets/art/world/missile_indicator.png" id="1_187mi"]
 [ext_resource type="Script" uid="uid://pk0y7mvrjxj4" path="res://src/gameplay/missile/missile_indicator.gd" id="2_b0ysk"]
+[ext_resource type="AudioStream" uid="uid://cdkn8dfh35cjc" path="res://assets/audio/sfx/warning.wav" id="3_wrn01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjqoo"]
 atlas = ExtResource("1_187mi")
@@ -50,3 +51,4 @@ sprite_frames = SubResource("SpriteFrames_187mi")
 animation = &"danger"
 autoplay = "flashing"
 script = ExtResource("2_b0ysk")
+warning_sound = ExtResource("3_wrn01")
