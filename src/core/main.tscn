@@ -1,31 +1,27 @@
 [gd_scene format=3 uid="uid://csehfx88edrj1"]
 
-[ext_resource type="Script" uid="uid://ctfib7m441jbs" path="res://src/core/main.gd" id="1_avv2o"]
-[ext_resource type="Script" uid="uid://drtbq8p1jgjmi" path="res://src/core/managers/game_manager.gd" id="2_nxx65"]
-[ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="2_ukt3u"]
-[ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="3_title"]
-[ext_resource type="PackedScene" uid="uid://b6qebhq6xggvu" path="res://src/ui/hud/score_display.tscn" id="4_2uitn"]
-[ext_resource type="Script" uid="uid://enc1ym3u6tkt" path="res://src/core/managers/level_manager.gd" id="4_lvlmgr"]
-[ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="5_pause"]
-[ext_resource type="PackedScene" uid="uid://cyy0mv22j3ywa" path="res://src/ui/menus/game_over_menu.tscn" id="6_nlf45"]
-[ext_resource type="PackedScene" uid="uid://da2e87er73qht" path="res://src/ui/menus/settings/settings_menu.tscn" id="6_settings"]
+[ext_resource type="Script" uid="uid://ctfib7m441jbs" path="res://src/core/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://drtbq8p1jgjmi" path="res://src/core/managers/game_manager.gd" id="2_gamemgr"]
+[ext_resource type="PackedScene" uid="uid://dtp5hr1fpdoib" path="res://src/levels/main_level.tscn" id="3_level"]
+[ext_resource type="PackedScene" uid="uid://bk2cu2ameptuy" path="res://src/gameplay/player/player.tscn" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://b6qebhq6xggvu" path="res://src/ui/hud/score_display.tscn" id="5_score"]
+[ext_resource type="Script" uid="uid://crtpk3x0pusxe" path="res://src/ui/hud/pause_button.gd" id="6_pausebtn"]
+[ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="7_title"]
+[ext_resource type="PackedScene" uid="uid://cyy0mv22j3ywa" path="res://src/ui/menus/game_over_menu.tscn" id="8_gameover"]
+[ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="9_pause"]
+[ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="10_debug"]
 
 [node name="Main" type="Node" unique_id=1077554886]
 process_mode = 3
-script = ExtResource("1_avv2o")
+script = ExtResource("1_main")
+level_scene = ExtResource("3_level")
+player_scene = ExtResource("4_player")
 
-[node name="Managers" type="Node" parent="." unique_id=44772124]
-
-[node name="GameManager" type="Node" parent="Managers" unique_id=2075326863 groups=["game_manager"]]
+[node name="GameManager" type="Node" parent="." unique_id=2075326863 groups=["game_manager"]]
 unique_name_in_owner = true
 process_mode = 1
-script = ExtResource("2_nxx65")
+script = ExtResource("2_gamemgr")
 metadata/_custom_type_script = "uid://drtbq8p1jgjmi"
-
-[node name="LevelManager" type="Node" parent="Managers" unique_id=1600000004]
-unique_name_in_owner = true
-script = ExtResource("4_lvlmgr")
-level_root_path = NodePath("../../World/LevelRoot")
 
 [node name="World" type="Node2D" parent="." unique_id=2140206829]
 process_mode = 1
@@ -42,74 +38,42 @@ unique_name_in_owner = true
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1519988769]
 layer = 5
 
-[node name="HudRoot" type="Control" parent="HudLayer" unique_id=1474753319]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ScoreDisplay" parent="HudLayer/HudRoot" unique_id=1132020845 node_paths=PackedStringArray("game_manager") instance=ExtResource("4_2uitn")]
+[node name="ScoreDisplay" parent="HudLayer" unique_id=1132020845 node_paths=PackedStringArray("game_manager") instance=ExtResource("5_score")]
 visible = false
-layout_mode = 1
 offset_left = 6.0
 offset_right = 6.0
-game_manager = NodePath("../../../Managers/GameManager")
+game_manager = NodePath("../../GameManager")
+
+[node name="PauseButton" type="Button" parent="HudLayer" unique_id=1298266314]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 35.0
+grow_horizontal = 0
+text = "P"
+script = ExtResource("6_pausebtn")
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1600000001]
-unique_name_in_owner = true
 layer = 15
 
-[node name="MenuRoot" type="Control" parent="MenuLayer" unique_id=1600000002]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="TitleScreen" parent="MenuLayer" unique_id=1600000003 instance=ExtResource("7_title")]
 
-[node name="TitleScreen" parent="MenuLayer/MenuRoot" unique_id=1600000003 instance=ExtResource("3_title")]
-layout_mode = 1
-level_uid = "uid://dtp5hr1fpdoib"
-
-[node name="GameOverMenu" parent="MenuLayer/MenuRoot" unique_id=822988843 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_nlf45")]
+[node name="GameOverMenu" parent="MenuLayer" unique_id=822988843 node_paths=PackedStringArray("game_manager") instance=ExtResource("8_gameover")]
 visible = false
-layout_mode = 1
-game_manager = NodePath("../../../Managers/GameManager")
+game_manager = NodePath("../../GameManager")
 
-[node name="SettingsMenu" parent="MenuLayer/MenuRoot" unique_id=1910660451 instance=ExtResource("6_settings")]
-visible = false
-layout_mode = 1
-
-[node name="PauseMenuRoot" type="Control" parent="MenuLayer" unique_id=931117828]
+[node name="PauseMenu" parent="MenuLayer" unique_id=272672056 instance=ExtResource("9_pause")]
 process_mode = 2
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PauseMenu" parent="MenuLayer/PauseMenuRoot" unique_id=272672056 instance=ExtResource("5_pause")]
 visible = false
-layout_mode = 1
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1767459730]
 process_mode = 3
 layer = 200
 
-[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=940994778]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=150186020 instance=ExtResource("2_ukt3u")]
-layout_mode = 1
+[node name="DebugTextOverlay" parent="DebugLayer" unique_id=150186020 instance=ExtResource("10_debug")]
 mouse_behavior_recursive = 1

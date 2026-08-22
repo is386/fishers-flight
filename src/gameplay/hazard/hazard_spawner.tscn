@@ -9,4 +9,3 @@ hazard_scene = ExtResource("2_4lq7g")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1731004592]
 wait_time = 3.0
-autostart = true

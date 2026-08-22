@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ddynicbetdmxt" path="res://src/ui/menus/game_over_menu.gd" id="1_dj8rh"]
 
-[sub_resource type="Theme" id="Theme_onja0"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_mpgju"]
 font_color = Color(0, 1, 0, 1)
 
@@ -14,7 +12,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_onja0")
 script = ExtResource("1_dj8rh")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2071107792]
@@ -25,33 +22,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="MarginContainer" parent="CenterContainer" unique_id=1844104077]
-layout_mode = 2
-
-[node name="Content" type="MarginContainer" parent="CenterContainer/Panel" unique_id=1444335797]
+[node name="Content" type="MarginContainer" parent="CenterContainer" unique_id=1444335797]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/Content" unique_id=427675173]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Content" unique_id=427675173]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ScoreLabel" type="Label" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=388265704]
+[node name="ScoreLabel" type="Label" parent="CenterContainer/Content/VBoxContainer" unique_id=388265704]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0000"
 label_settings = SubResource("LabelSettings_mpgju")
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=880600548]
+[node name="RestartButton" type="Button" parent="CenterContainer/Content/VBoxContainer" unique_id=880600548]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
-
-[node name="ExitToMenuButton" type="Button" parent="CenterContainer/Panel/Content/VBoxContainer" unique_id=575134282]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Exit to Menu"

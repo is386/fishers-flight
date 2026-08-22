@@ -20,6 +20,7 @@ func _ready() -> void:
 
 	SignalBus.milestone_reached.connect(_on_milestone_reached)
 	SignalBus.player_died.connect(_on_player_died)
+	SignalBus.level_loaded.connect(_on_level_loaded)
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -64,3 +65,7 @@ func _on_milestone_reached() -> void:
 
 func _on_player_died() -> void:
 	queue_free()
+
+
+func _on_level_loaded() -> void:
+	spawn_timer.start()

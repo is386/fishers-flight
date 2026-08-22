@@ -9,7 +9,6 @@ missile_scene = ExtResource("2_v70k7")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1958347021]
 wait_time = 8.0
-autostart = true
 
 [node name="AimTimer" type="Timer" parent="." unique_id=1451281607]
 wait_time = 3.0
