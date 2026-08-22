@@ -6,6 +6,9 @@ enum HazardType { HORIZONTAL, VERTICAL, DIAGONAL_UP, DIAGONAL_DOWN }
 signal despawned
 
 const BLOCK_SIZE = 12.0
+const BOB_PERIOD = 0.6
+const BOB_PHASE_STEP = 0.15
+const BOB_AMPLITUDE = 1.25
 
 @export var length: int = 1
 @export var type: HazardType = HazardType.HORIZONTAL
@@ -22,6 +25,7 @@ const BLOCK_SIZE = 12.0
 @onready var despawn_timer: Timer = $DespawnTimer
 
 var _blocks: Array[Sprite2D]
+var _time: float = 0
 
 
 func _ready() -> void:
@@ -44,6 +48,12 @@ func _physics_process(delta: float) -> void:
 		rotation -= delta
 
 	global_position.x -= speed * delta
+
+	_time += delta
+
+	for i in _blocks.size():
+		var phase := _time / BOB_PERIOD - i * BOB_PHASE_STEP
+		_blocks[i].offset.y = -BOB_AMPLITUDE * 0.5 * (1.0 - cos(TAU * phase))
 
 
 func _build_hazard() -> void:
