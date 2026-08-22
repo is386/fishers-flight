@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://30n8yprab0ke"]
 
 [ext_resource type="Script" uid="uid://8mu725g5nk5x" path="res://src/ui/menus/pause_menu.gd" id="1_pause"]
+[ext_resource type="FontFile" uid="uid://c73m34tp6uufu" path="res://assets/fonts/Bore Blasters All Caps 21.ttf" id="2_ikjnk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_onja0"]
+font = ExtResource("2_ikjnk")
+font_size = 48
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-2.5, 2.5)
 
 [node name="PauseMenu" type="Control" unique_id=822988843]
 layout_mode = 3
@@ -26,4 +36,5 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Paused"
+label_settings = SubResource("LabelSettings_onja0")
 horizontal_alignment = 1

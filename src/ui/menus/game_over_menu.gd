@@ -2,8 +2,7 @@ extends Control
 
 @export var game_manager: GameManager
 
-@onready var score_label: Label = %ScoreLabel
-@onready var restart_button: Button = %RestartButton
+@onready var restart_button: TextureButton = %RestartButton
 
 
 func _ready() -> void:
@@ -17,5 +16,4 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_player_died() -> void:
-	score_label.text = "%04d" % game_manager.distance
 	show()
