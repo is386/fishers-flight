@@ -11,6 +11,7 @@ signal game_resume_requested
 signal level_loaded
 
 signal milestone_reached
+signal high_score_achieved
 
 signal player_died
 
