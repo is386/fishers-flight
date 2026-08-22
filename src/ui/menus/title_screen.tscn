@@ -1,6 +1,57 @@
 [gd_scene format=3 uid="uid://ehbd0ol75ec8"]
 
 [ext_resource type="Script" uid="uid://cmwqrclygi2r5" path="res://src/ui/menus/title_screen.gd" id="1_title"]
+[ext_resource type="FontFile" uid="uid://c73m34tp6uufu" path="res://assets/fonts/Bore Blasters All Caps 21.ttf" id="2_5naw2"]
+[ext_resource type="LabelSettings" uid="uid://dhsc166jtb85o" path="res://src/resources/ui/subtext.tres" id="2_638h5"]
+
+[sub_resource type="Animation" id="Animation_5naw2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_638h5"]
+resource_name = "flash"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7x7es"]
+_data = {
+&"RESET": SubResource("Animation_5naw2"),
+&"flash": SubResource("Animation_638h5")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_215gw"]
+line_spacing = 0.0
+font = ExtResource("2_5naw2")
+font_size = 72
+font_color = Color(0.9137255, 0.5764706, 0, 1)
+outline_size = 10
+outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+shadow_size = 10
+shadow_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+shadow_offset = Vector2(-7.5, 5)
 
 [node name="TitleScreen" type="Control" unique_id=1736167833]
 layout_mode = 3
@@ -12,18 +63,38 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_title")
 
-[node name="TitleLabel" type="Label" parent="." unique_id=740623256]
+[node name="StartLabel" type="Label" parent="." unique_id=740623256]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -11.5
-offset_right = 80.0
-offset_bottom = 11.5
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -37.0
+offset_right = 102.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 2
-text = "Fisher's Flight"
+grow_vertical = 0
+text = "TAP TO START!"
+label_settings = ExtResource("2_638h5")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartLabel" unique_id=268595450]
+libraries/ = SubResource("AnimationLibrary_7x7es")
+autoplay = &"flash"
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1753739158]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -197.5
+offset_right = 197.5
+offset_bottom = 73.0
+grow_horizontal = 2
+text = "FISHER's
+FLIGHT
+"
+label_settings = SubResource("LabelSettings_215gw")
 horizontal_alignment = 1

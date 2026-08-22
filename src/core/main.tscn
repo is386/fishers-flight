@@ -5,11 +5,37 @@
 [ext_resource type="PackedScene" uid="uid://dtp5hr1fpdoib" path="res://src/levels/main_level.tscn" id="3_level"]
 [ext_resource type="PackedScene" uid="uid://bk2cu2ameptuy" path="res://src/gameplay/player/player.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://b6qebhq6xggvu" path="res://src/ui/hud/score_display.tscn" id="5_score"]
+[ext_resource type="Texture2D" uid="uid://dqspxlsleww88" path="res://assets/art/ui/icons.png" id="6_7o0du"]
 [ext_resource type="Script" uid="uid://crtpk3x0pusxe" path="res://src/ui/hud/pause_button.gd" id="6_pausebtn"]
 [ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="7_title"]
+[ext_resource type="Script" uid="uid://cqgrln7lob52b" path="res://src/ui/hud/play_button.gd" id="8_7561f"]
 [ext_resource type="PackedScene" uid="uid://cyy0mv22j3ywa" path="res://src/ui/menus/game_over_menu.tscn" id="8_gameover"]
 [ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="9_pause"]
 [ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="10_debug"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn2t0"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qdld"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtw6j"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o0du"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7561f"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g4b3"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(160, 0, 32, 32)
 
 [node name="Main" type="Node" unique_id=1077554886]
 process_mode = 3
@@ -44,19 +70,37 @@ offset_left = 6.0
 offset_right = 6.0
 game_manager = NodePath("../../GameManager")
 
-[node name="PauseButton" type="Button" parent="HudLayer" unique_id=1298266314]
+[node name="PauseButton" type="TextureButton" parent="HudLayer" unique_id=379750108]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -22.0
+offset_left = -36.0
 offset_top = 4.0
 offset_right = -4.0
-offset_bottom = 35.0
+offset_bottom = 36.0
 grow_horizontal = 0
-text = "P"
+texture_normal = SubResource("AtlasTexture_sn2t0")
+texture_pressed = SubResource("AtlasTexture_3qdld")
+texture_hover = SubResource("AtlasTexture_xtw6j")
 script = ExtResource("6_pausebtn")
+
+[node name="PlayButton" type="TextureButton" parent="HudLayer" unique_id=822502978]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 36.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_7o0du")
+texture_pressed = SubResource("AtlasTexture_7561f")
+texture_hover = SubResource("AtlasTexture_0g4b3")
+script = ExtResource("8_7561f")
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1600000001]
 layer = 15

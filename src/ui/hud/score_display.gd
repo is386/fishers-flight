@@ -7,8 +7,7 @@ extends Control
 
 func _ready() -> void:
 	SignalBus.level_loaded.connect(show)
-	SignalBus.player_died.connect(hide)
 
 
 func _process(_delta: float) -> void:
-	distance_label.text = "%04d" % game_manager.distance
+	distance_label.text = "%05d" % game_manager.distance
