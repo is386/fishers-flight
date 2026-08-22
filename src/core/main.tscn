@@ -93,6 +93,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PauseMenu" parent="MenuLayer/PauseMenuRoot" unique_id=272672056 instance=ExtResource("5_pause")]
+visible = false
 layout_mode = 1
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1767459730]
