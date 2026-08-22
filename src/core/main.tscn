@@ -11,32 +11,77 @@
 [ext_resource type="PackedScene" uid="uid://ehbd0ol75ec8" path="res://src/ui/menus/title_screen.tscn" id="7_title"]
 [ext_resource type="Script" uid="uid://cqgrln7lob52b" path="res://src/ui/hud/play_button.gd" id="8_7561f"]
 [ext_resource type="PackedScene" uid="uid://cyy0mv22j3ywa" path="res://src/ui/menus/game_over_menu.tscn" id="8_gameover"]
+[ext_resource type="Script" uid="uid://d2iw3cqrlolwe" path="res://src/ui/hud/mute_button.gd" id="8_mutebtn"]
 [ext_resource type="PackedScene" uid="uid://30n8yprab0ke" path="res://src/ui/menus/pause_menu.tscn" id="9_pause"]
 [ext_resource type="PackedScene" uid="uid://bwmhixliuiiqq" path="res://src/ui/debug/debug_text_overlay.tscn" id="10_debug"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sn2t0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pause_n"]
 atlas = ExtResource("6_7o0du")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3qdld"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pause_p"]
 atlas = ExtResource("6_7o0du")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtw6j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pause_h"]
 atlas = ExtResource("6_7o0du")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7o0du"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_play_n"]
 atlas = ExtResource("6_7o0du")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7561f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_play_p"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_play_h"]
 atlas = ExtResource("6_7o0du")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0g4b3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfx_n"]
 atlas = ExtResource("6_7o0du")
-region = Rect2(160, 0, 32, 32)
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfx_h"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfx_muted_n"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfx_muted_p"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfx_muted_h"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_n"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_p"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_h"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_muted_n"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_muted_p"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(512, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_music_muted_h"]
+atlas = ExtResource("6_7o0du")
+region = Rect2(480, 0, 32, 32)
 
 [node name="Main" type="Node" unique_id=1077554886]
 process_mode = 3
@@ -83,13 +128,12 @@ offset_top = 4.0
 offset_right = -4.0
 offset_bottom = 36.0
 grow_horizontal = 0
-texture_normal = SubResource("AtlasTexture_sn2t0")
-texture_pressed = SubResource("AtlasTexture_3qdld")
-texture_hover = SubResource("AtlasTexture_xtw6j")
+texture_normal = SubResource("AtlasTexture_pause_n")
+texture_pressed = SubResource("AtlasTexture_pause_p")
+texture_hover = SubResource("AtlasTexture_pause_h")
 script = ExtResource("6_pausebtn")
 
 [node name="PlayButton" type="TextureButton" parent="HudLayer" unique_id=822502978]
-visible = false
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = 1
 anchor_left = 1.0
@@ -99,10 +143,76 @@ offset_top = 4.0
 offset_right = -4.0
 offset_bottom = 36.0
 grow_horizontal = 0
-texture_normal = SubResource("AtlasTexture_7o0du")
-texture_pressed = SubResource("AtlasTexture_7561f")
-texture_hover = SubResource("AtlasTexture_0g4b3")
+texture_normal = SubResource("AtlasTexture_play_n")
+texture_pressed = SubResource("AtlasTexture_play_p")
+texture_hover = SubResource("AtlasTexture_play_h")
 script = ExtResource("8_7561f")
+
+[node name="SFXButton" type="TextureButton" parent="HudLayer" unique_id=978294631]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = 72.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_sfx_n")
+texture_pressed = SubResource("AtlasTexture_sfx_n")
+texture_hover = SubResource("AtlasTexture_sfx_h")
+script = ExtResource("8_mutebtn")
+channel = 1
+
+[node name="SFXMutedButton" type="TextureButton" parent="HudLayer" unique_id=1443027561]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = 72.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_sfx_muted_n")
+texture_pressed = SubResource("AtlasTexture_sfx_muted_p")
+texture_hover = SubResource("AtlasTexture_sfx_muted_h")
+script = ExtResource("8_mutebtn")
+channel = 1
+shows_muted_icon = true
+
+[node name="MusicButton" type="TextureButton" parent="HudLayer" unique_id=1172568422]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 76.0
+offset_right = -4.0
+offset_bottom = 108.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_music_n")
+texture_pressed = SubResource("AtlasTexture_music_p")
+texture_hover = SubResource("AtlasTexture_music_h")
+script = ExtResource("8_mutebtn")
+
+[node name="MusicMutedButton" type="TextureButton" parent="HudLayer" unique_id=1988340172]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = 76.0
+offset_right = -4.0
+offset_bottom = 108.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_music_muted_n")
+texture_pressed = SubResource("AtlasTexture_music_muted_p")
+texture_hover = SubResource("AtlasTexture_music_muted_h")
+script = ExtResource("8_mutebtn")
+shows_muted_icon = true
 
 [node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1600000001]
 layer = 15

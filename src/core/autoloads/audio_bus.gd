@@ -6,12 +6,13 @@ const SFX_BUS: StringName = &"SFX"
 
 const SFX_POOL_SIZE: int = 8
 
-## Music sits under the sound effects; the Music bus scales on top of this.
 const MUSIC_VOLUME_DB: float = -2.5
 
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _music_player: AudioStreamPlayer = null
 var _music_loops: bool = true
+var force_music_off: bool = false
+var force_sfx_off: bool = false
 
 
 func _ready() -> void:
@@ -26,7 +27,7 @@ func _ready() -> void:
 
 
 func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
-	if stream == null:
+	if stream == null or force_sfx_off:
 		return
 
 	for _sfx_player: AudioStreamPlayer in _sfx_players:
@@ -38,7 +39,7 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
 
 
 func play_music(stream: AudioStream, loop: bool = true) -> void:
-	if stream == null:
+	if stream == null or force_music_off:
 		return
 
 	_music_loops = loop
@@ -54,6 +55,33 @@ func stop_music() -> void:
 	_music_player.stop()
 
 
+func set_music_muted(muted: bool) -> void:
+	if force_music_off == muted:
+		return
+
+	force_music_off = muted
+
+	if muted:
+		_music_player.stop()
+	elif _music_player.stream != null:
+		_music_player.play()
+
+	SignalBus.music_mute_changed.emit(muted)
+
+
+func set_sfx_muted(muted: bool) -> void:
+	if force_sfx_off == muted:
+		return
+
+	force_sfx_off = muted
+
+	if muted:
+		for _sfx_player: AudioStreamPlayer in _sfx_players:
+			_sfx_player.stop()
+
+	SignalBus.sfx_mute_changed.emit(muted)
+
+
 func set_master_volume(linear_volume: float) -> void:
 	_set_bus_volume(MASTER_BUS, linear_volume)
 
@@ -67,7 +95,7 @@ func set_sfx_volume(linear_volume: float) -> void:
 
 
 func _on_music_finished() -> void:
-	if _music_loops:
+	if _music_loops and not force_music_off:
 		_music_player.play()
 
 

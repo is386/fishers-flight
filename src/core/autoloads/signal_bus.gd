@@ -15,4 +15,7 @@ signal high_score_achieved
 
 signal player_died
 
+signal music_mute_changed(muted: bool)
+signal sfx_mute_changed(muted: bool)
+
 signal camera_shake_requested(intensity: float, time: float)

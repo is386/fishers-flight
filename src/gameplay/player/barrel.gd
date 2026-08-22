@@ -38,13 +38,28 @@ func stop() -> void:
 	animator.play("RESET")
 
 
+func _ready() -> void:
+	SignalBus.sfx_mute_changed.connect(_on_sfx_mute_changed)
+
+
+## The jetpack loop drives its own player rather than going through
+## AudioBus.play_sfx, so it has to honour the mute flag itself.
 func set_jetpack_playing(is_playing: bool) -> void:
-	if is_playing == jetpack_audio.playing:
+	var should_play: bool = is_playing and not AudioBus.force_sfx_off
+
+	if should_play == jetpack_audio.playing:
 		return
 
-	if is_playing:
+	if should_play:
 		jetpack_audio.play()
 	else:
+		jetpack_audio.stop()
+
+
+## Muting happens from the pause menu, where the player has stopped driving
+## set_jetpack_playing, so an already looping jetpack has to be cut here.
+func _on_sfx_mute_changed(muted: bool) -> void:
+	if muted:
 		jetpack_audio.stop()
 
 
