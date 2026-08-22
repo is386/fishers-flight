@@ -2,11 +2,13 @@ class_name GameManager
 extends Node
 
 var distance: float
+var high_score: float
 var speed: float
 var milestone: float
 var _is_running: bool
 var _distance_increment: float
 var _speed_increment: float
+var _high_score_achieved: bool
 
 
 func _ready() -> void:
@@ -22,6 +24,7 @@ func reset() -> void:
 	_is_running = false
 	_distance_increment = 0.3
 	_speed_increment = 0.006
+	_high_score_achieved = false
 
 
 func _physics_process(_delta: float) -> void:
@@ -31,6 +34,10 @@ func _physics_process(_delta: float) -> void:
 
 	distance += _distance_increment
 	speed += _speed_increment
+
+	if high_score > 0 and distance > high_score and not _high_score_achieved:
+		_high_score_achieved = true
+		SignalBus.high_score_achieved.emit()
 
 	if distance > milestone and milestone <= 5000:
 		milestone += 1000
@@ -46,3 +53,5 @@ func _on_level_loaded() -> void:
 
 func _on_player_died() -> void:
 	_is_running = false
+	if distance > high_score:
+		high_score = distance
