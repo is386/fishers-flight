@@ -1,30 +1,31 @@
 class_name GameManager
 extends Node
 
-var distance: float = 0
-var speed: float = 100
-var milestone: float = 1000
-var _is_started: bool
-var _distance_increment: float = 0.3
-var _speed_increment: float = 0.006
+var distance: float
+var speed: float
+var milestone: float
+var _is_running: bool
+var _distance_increment: float
+var _speed_increment: float
 
 
 func _ready() -> void:
 	SignalBus.level_loaded.connect(_on_level_loaded)
 	SignalBus.player_died.connect(_on_player_died)
+	reset()
 
 
 func reset() -> void:
 	distance = 0
-	speed = 100
+	speed = 0
 	milestone = 1000
-	_is_started = false
+	_is_running = false
 	_distance_increment = 0.3
 	_speed_increment = 0.006
 
 
 func _physics_process(_delta: float) -> void:
-	if not _is_started:
+	if not _is_running:
 		speed = max(0, speed - 1)
 		return
 
@@ -39,8 +40,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_level_loaded() -> void:
-	_is_started = true
+	_is_running = true
+	speed = 100
 
 
 func _on_player_died() -> void:
-	_is_started = false
+	_is_running = false

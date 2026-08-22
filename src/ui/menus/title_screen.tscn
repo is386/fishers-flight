@@ -27,25 +27,3 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Fisher's Flight"
 horizontal_alignment = 1
-
-[node name="TopBar" type="MarginContainer" parent="." unique_id=1034867251]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 39.0
-grow_horizontal = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TopBar" unique_id=1085614666]
-layout_mode = 2
-alignment = 2
-
-[node name="SettingsButton" type="Button" parent="TopBar/HBoxContainer" unique_id=422166878]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-offset_transform_enabled = true
-text = "S"

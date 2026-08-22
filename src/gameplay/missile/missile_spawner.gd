@@ -19,6 +19,7 @@ func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player")
 
 	SignalBus.player_died.connect(_on_player_died)
+	SignalBus.level_loaded.connect(_on_level_loaded)
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -41,3 +42,7 @@ func _on_shoot_timer_timeout() -> void:
 
 func _on_player_died() -> void:
 	queue_free()
+
+
+func _on_level_loaded() -> void:
+	spawn_timer.start()
