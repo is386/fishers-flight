@@ -96,19 +96,6 @@ texture = ExtResource("2_knvb2")
 collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_215gw")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=60080665]
-visible = false
-z_index = 40
-y_sort_enabled = true
-position = Vector2(5, 19)
-amount = 35
-texture = ExtResource("2_knvb2")
-direction = Vector2(0, 1)
-spread = 15.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2051525658]
 texture = ExtResource("1_t3xch")
 offset = Vector2(-0.032381587, 0)
