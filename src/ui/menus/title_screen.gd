@@ -5,6 +5,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 
-	if event is InputEventMouseButton and event.is_pressed():
-		hide()
-		SignalBus.game_started.emit()
+	if not event.is_action_pressed("fly"):
+		return
+
+	hide()
+	SignalBus.game_started.emit()
+	get_viewport().set_input_as_handled()
