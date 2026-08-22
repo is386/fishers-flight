@@ -9,11 +9,16 @@ var _is_running: bool
 var _distance_increment: float
 var _speed_increment: float
 var _high_score_achieved: bool
+var _save: SaveGame
 
 
 func _ready() -> void:
 	SignalBus.level_loaded.connect(_on_level_loaded)
 	SignalBus.player_died.connect(_on_player_died)
+	_save = SaveGame.load_save()
+	if _save == null:
+		_save = SaveGame.new()
+	high_score = _save.high_score
 	reset()
 
 
@@ -55,3 +60,5 @@ func _on_player_died() -> void:
 	_is_running = false
 	if distance > high_score:
 		high_score = distance
+		_save.high_score = high_score
+		_save.write_save()
