@@ -1,5 +1,7 @@
 extends Parallax2D
 
+@export var speed_modifier: float = 0.25
+
 var _game_manager: GameManager
 
 
@@ -9,4 +11,4 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	autoscroll.x = -_game_manager.speed
+	autoscroll.x = -_game_manager.speed * speed_modifier
