@@ -13,14 +13,18 @@ This is a Jetpack Joyride style game created using the Godot engine as part of t
 
 ## Credits
 
+### Programming and Art
+
+- Me
+
 ### Audio
 
-Jetpack Joyride
+- Jetpack Joyride
 
-OldSchool RuneScape
+- OldSchool RuneScape
 
-[Helton Yan](https://heltonyan.itch.io/)
+- [Helton Yan](https://heltonyan.itch.io/)
 
 ### Fonts
 
-[Not Jam](https://not-jam.itch.io/not-jam-font-pack)
+- [Not Jam](https://not-jam.itch.io/not-jam-font-pack)
